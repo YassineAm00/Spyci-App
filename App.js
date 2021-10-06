@@ -27,23 +27,26 @@ function TestScreen({ navigation }) {
   );
 }
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     // <>
-      <>
-        {/* <TestScreen /> */}
+    <>
+      {/* <TestScreen /> */}
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Profile" component={profile} />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen name="Home" component={Home} />
-          {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
+          <Stack.Screen name="Profile" component={profile} />
           <Stack.Screen name="Details" component={DetailsScreen} />
+          {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
-      </>
+    </>
     // </>
   );
 }
@@ -54,6 +57,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    height: 100
+    height: 100,
   },
 });

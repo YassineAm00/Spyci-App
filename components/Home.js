@@ -23,11 +23,74 @@ import RangeSlider, { Slider } from "react-native-range-slider-expo";
 import MapView, { Marker } from "react-native-maps";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import FilterComponent from "./Filter";
+import { AppLoading } from "expo";
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from "@expo-google-fonts/poppins";
 
 export default function Home({ navigation }) {
   // Bottom sheet
-  let BS = useRef();
+  let BS =  useRef();
   let fall = new Animated.Value(1);
+
+  // const [fontsLoaded , setfontLoaded] = useState(useFonts({
+  //   // Poppins_100Thin,
+  //   // Poppins_100Thin_Italic,
+  //   // Poppins_200ExtraLight,
+  //   // Poppins_200ExtraLight_Italic,
+  //   Poppins_300Light,
+  //   Poppins_300Light_Italic,
+  //   Poppins_400Regular,
+  //   Poppins_400Regular_Italic,
+  //   // Poppins_500Medium,
+  //   // Poppins_500Medium_Italic,
+  //   // Poppins_600SemiBold,
+  //   // Poppins_600SemiBold_Italic,
+  //   // Poppins_700Bold,
+  //   // Poppins_700Bold_Italic,
+  //   // Poppins_800ExtraBold,
+  //   // Poppins_800ExtraBold_Italic,
+  //   // Poppins_900Black,
+  //   // Poppins_900Black_Italic,
+  // }));
+  const fontsLoaded = useFonts({
+    // Poppins_100Thin,
+    // Poppins_100Thin_Italic,
+    // Poppins_200ExtraLight,
+    // Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    // Poppins_600SemiBold,
+    // Poppins_600SemiBold_Italic,
+    // Poppins_700Bold,
+    // Poppins_700Bold_Italic,
+    // Poppins_800ExtraBold,
+    // Poppins_800ExtraBold_Italic,
+    // Poppins_900Black,
+    // Poppins_900Black_Italic,
+  })
 
   const renderInner = () => (
     <View style={styles.panel}>
@@ -41,14 +104,13 @@ export default function Home({ navigation }) {
           justifyContent: "space-between",
           padding: 15,
           paddingHorizontal: 20,
-          zIndex: 99999999
+          zIndex: 99999999,
         }}
       >
-          
-        <TouchableHighlight >
+        <TouchableHighlight>
           <Feather name="x" size={24} color="#FF0031" />
           {/* <Text>test</Text> */}
-        </TouchableHighlight >
+        </TouchableHighlight>
 
         <View
           style={{
@@ -211,7 +273,7 @@ export default function Home({ navigation }) {
       </Pressable>
     </View>
   );
-  
+
   const renderHeader = () => (
     <View style={styles.headersheet}>
       <View style={styles.panelHeader}>
@@ -219,116 +281,123 @@ export default function Home({ navigation }) {
       </View>
     </View>
   );
-  
+
   // Age
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
   const [value, setValue] = useState(0);
-  
+
   // Current Location Js
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  
+
   useEffect(() => {
+    console.log(fontsLoaded[0]);
     (async () => {
       if (Platform.OS === "android" && !Constants.isDevice) {
         setErrorMsg(
           "Oops, this will not work on Snack in an Android emulator. Try it on your device!"
-          );
-          return;
-        }
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("Permission to access location was denied");
-          return;
-        }
-        
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-      })();
-    }, []);
-    
-    let text = "Waiting...";
-    let latitude = {};
-    let longitude = {};
-    if (errorMsg) {
-      alert(errorMsg);
-    } else if (location) {
-      latitude = location.coords.latitude;
-      longitude = location.coords.longitude;
-      // alert(JSON.stringify(location.coords.longitude));
-    }
-    
+        );
+        return;
+      }
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = "Waiting...";
+  let latitude = {};
+  let longitude = {};
+  if (errorMsg) {
+    alert(errorMsg);
+  } else if (location) {
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+    // alert(JSON.stringify(location.coords.longitude));
+  }
+
+  if (!fontsLoaded[0]) {
+    return <Text>{text}</Text>;
+  } else {
     return (
       <View style={styles.container}>
-      {/* :::::::::::: Hearder :::::::::::: */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          // title="test"
-          style={styles.headerItem}
-          className="col-lg-4"
-          onPress={() => BS.current.snapTo(0)}
-        >
-          {/* <Icon name="filter" size={30} color="#D31245" /> */}
-          <AntDesign name="filter" size={30} color="#D1D3D4" />
-          <Text style={styles.header__text} style={{ color: "#D1D3D4" }}>
-            FILTER
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.headerItem} className=" col-lg-4 ">
-          {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
-          {/* <AntDesign name="message-circle" size={32} color="green" /> */}
-          <Feather name="message-circle" size={30} color="#D1D3D4" />
-          <Text style={styles.header__text}>MESSENGER</Text>
+        {/* :::::::::::: Hearder :::::::::::: */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            // title="test"
+            style={styles.headerItem}
+            className="col-lg-4"
+            onPress={() => BS.current.snapTo(0)}
+          >
+            {/* <Icon name="filter" size={30} color="#D31245" /> */}
+            <AntDesign name="filter" size={30} color="#D1D3D4" />
+            <Text style={styles.header__text}>
+              FILTER
+              {/* atest */}
+            </Text>
+          </TouchableOpacity>
+          <View style={styles.headerItem} className=" col-lg-4 ">
+            {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
+            {/* <AntDesign name="message-circle" size={32} color="green" /> */}
+            <Feather name="message-circle" size={30} color="#D1D3D4" />
+            <Text style={styles.header__text}>MESSENGER</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.headerItem}
+            className=" col-lg-4 "
+            onPress={() => navigation.navigate("Profile")}
+          >
+            <AntDesign name="user" size={30} color="#D1D3D4" />
+
+            <Text style={styles.header__text}>PROFILE</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.headerItem}
-          className=" col-lg-4 "
-          // onPress={navigateToProfile}
-        >
-          <AntDesign name="user" size={30} color="#D1D3D4" />
 
-          <Text style={styles.header__text}>PROFILE</Text>
-        </TouchableOpacity>
-      </View>
+        {/* :::::::::::: Map :::::::::::: */}
+        {location ? (
+          <MapScreen latitude={latitude} longitude={longitude} />
+        ) : (
+          <Text>{text}</Text>
+        )}
 
-      {/* :::::::::::: Map :::::::::::: */}
-      {location ? (
-        <MapScreen latitude={latitude} longitude={longitude} />
-      ) : (
-        <Text>{text}</Text>
-      )}
-
-      {/* :::::::::::: Search Bar :::::::::::: */}
-      <View style={styles.search__bar}>
-        {/* <Icon
+        {/* :::::::::::: Search Bar :::::::::::: */}
+        <View style={styles.search__bar}>
+          {/* <Icon
           name="search"
           size={25}
           style={styles.search__icon}
           color="#D31245"
         /> */}
-        <AntDesign
-          name="search1"
-          size={24}
-          color="#D31245"
-          style={styles.search__icon}
-        />
-        <TextInput style={styles.input} placeholder="Type here to search" />
-      </View>
+          <AntDesign
+            name="search1"
+            size={24}
+            color="#D31245"
+            style={styles.search__icon}
+          />
+          <TextInput style={styles.input} placeholder="Type here to search" />
+        </View>
 
-      {/* :::::::::::: Bottom sheet :::::::::::: */}
-      <BottomSheet
-        ref={BS}
-        snapPoints={["75%", "0%"]}
-        renderContent={renderInner}
-        renderHeader={renderHeader}
-        initialSnap={1}
-        callbackNode={fall}
-        enabledGestureInteraction={true}
-        style={{ height: 700 }}
-      />
-    </View>
-  );
+        {/* :::::::::::: Bottom sheet :::::::::::: */}
+        <BottomSheet
+          ref={BS}
+          snapPoints={["80%", "0%"]}
+          renderContent={renderInner}
+          renderHeader={renderHeader}
+          initialSnap={1}
+          callbackNode={fall}
+          enabledGestureInteraction={true}
+          style={{ height: 700 }}
+        />
+      </View>
+    ) 
+    // : <AppLoading />;
+  }
 }
 
 const styles = StyleSheet.create({
@@ -362,7 +431,8 @@ const styles = StyleSheet.create({
   },
   header__text: {
     color: "#D1D3D4",
-    marginTop: 3,
+    marginTop: 3, 
+    fontFamily: 'Poppins_500Medium'
   },
   headerItem: {
     flex: 1,
@@ -396,6 +466,8 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 10,
     backgroundColor: "transparent",
+    fontFamily: 'Poppins_500Medium'
+
   },
   search__icon: {
     width: "10%",
