@@ -7,6 +7,7 @@ import profile from "./components/Profile";
 import Location from "./components/Home";
 import MapScreen from "./components/Profile";
 import Home from "./components/Home";
+import Filter from "./components/Filter";
 function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -42,7 +43,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profile" component={profile} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Filter" component={Filter} />
           {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>

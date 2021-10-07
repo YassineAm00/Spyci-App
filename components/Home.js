@@ -21,7 +21,7 @@ import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
 import RangeSlider, { Slider } from "react-native-range-slider-expo";
 import MapView, { Marker } from "react-native-maps";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, Entypo } from "@expo/vector-icons";
 import FilterComponent from "./Filter";
 import { AppLoading } from "expo";
 import {
@@ -48,7 +48,8 @@ import {
 
 export default function Home({ navigation }) {
   // Bottom sheet
-  let BS =  useRef();
+  let BS = useRef();
+  let Bar = useRef();
   let fall = new Animated.Value(1);
 
   // const [fontsLoaded , setfontLoaded] = useState(useFonts({
@@ -90,7 +91,7 @@ export default function Home({ navigation }) {
     // Poppins_800ExtraBold_Italic,
     // Poppins_900Black,
     // Poppins_900Black_Italic,
-  })
+  });
 
   const renderInner = () => (
     <View style={styles.panel}>
@@ -274,6 +275,136 @@ export default function Home({ navigation }) {
     </View>
   );
 
+  const renderBar = () => (
+    <View style={styles.panel}>
+      <View
+        style={{
+          alignItems: "center",
+          // backgroundColor: "yellow",
+          borderBottomWidth: 1,
+          borderBottomColor: "#E5E5E5",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          padding: 15,
+          paddingHorizontal: 20,
+          zIndex: 99999999,
+        }}
+      >
+        <TouchableHighlight>
+          <Feather name="x" size={24} color="#FF0031" />
+          {/* <Text>test</Text> */}
+        </TouchableHighlight>
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          <AntDesign name="filter" size={24} color="#FF0031" />
+          <Text
+            style={{
+              color: "gray",
+              // fontFamily: "Inter_900Black",
+              fontWeight: "bold",
+              marginLeft: 6,
+            }}
+          >
+            FILTER
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          height: 150,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            width: "45%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* <Text>Test</Text> */}
+          <Image
+            style={{
+              height: 100,
+              width: 100,
+              // borderRadius: 10,
+              // position: "relative",
+            }}
+            source={require("../assets/img/Home/Image_2.png")}
+          />
+        </View>
+        <View style={{ width: "55%", flexDirection: "column" }}>
+          <View
+            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
+          >
+            <Entypo
+              name="location-pin"
+              // style={{  }}
+              size={26}
+              color="#FF0031"
+              style={{ marginRight: 10 }}
+            />
+            <View>
+              <Text style={{ fontSize: 12, color: "gray" }}>25 Van Gogh</Text>
+              <Text style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}>
+                75000 Paris
+              </Text>
+            </View>
+            <View
+              style={{
+                marginLeft: 15,
+                height: "50%",
+                backgroundColor: "red",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "gray", padding: 0 }}>
+                <Text
+                  style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}
+                >
+                  4
+                </Text>{" "}
+                Km
+              </Text>
+              <Text style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}>
+                away
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
+          >
+            <Feather
+              name="user"
+              size={26}
+              style={{ marginRight: 10 }}
+              color="#FF0031"
+            />
+            <View>
+              <Text style={{ fontSize: 12, color: "gray" }}>
+                23 people is here
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      {/* Button  */}
+      <Pressable style={styles.buttonSheet}>
+        <Text style={styles.text}>DONE</Text>
+      </Pressable>
+    </View>
+  );
+
   const renderHeader = () => (
     <View style={styles.headersheet}>
       <View style={styles.panelHeader}>
@@ -342,12 +473,16 @@ export default function Home({ navigation }) {
               {/* atest */}
             </Text>
           </TouchableOpacity>
-          <View style={styles.headerItem} className=" col-lg-4 ">
+          <TouchableOpacity
+            style={styles.headerItem}
+            className=" col-lg-4 "
+            onPress={() => navigation.navigate("Filter")}
+          >
             {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
             {/* <AntDesign name="message-circle" size={32} color="green" /> */}
             <Feather name="message-circle" size={30} color="#D1D3D4" />
             <Text style={styles.header__text}>MESSENGER</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.headerItem}
             className=" col-lg-4 "
@@ -395,7 +530,7 @@ export default function Home({ navigation }) {
           style={{ height: 700 }}
         />
       </View>
-    ) 
+    );
     // : <AppLoading />;
   }
 }
@@ -431,8 +566,8 @@ const styles = StyleSheet.create({
   },
   header__text: {
     color: "#D1D3D4",
-    marginTop: 3, 
-    fontFamily: 'Poppins_500Medium'
+    marginTop: 3,
+    fontFamily: "Poppins_500Medium",
   },
   headerItem: {
     flex: 1,
@@ -466,8 +601,7 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 10,
     backgroundColor: "transparent",
-    fontFamily: 'Poppins_500Medium'
-
+    fontFamily: "Poppins_500Medium",
   },
   search__icon: {
     width: "10%",
