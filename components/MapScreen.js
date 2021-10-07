@@ -13,9 +13,10 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import { Avatar } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
 import { AntDesign, Feather, Entypo } from "@expo/vector-icons";
 import {
   useFonts,
@@ -92,17 +93,17 @@ export default function MapScreen(props) {
             justifyContent: "space-around",
           }}
         >
-          <AntDesign name="filter" size={24} color="#FF0031" />
+          {/* <AntDesign name="filter" size={24} color="#FF0031" /> */}
           <Text
             style={{
-              color: "gray",
+              color: "#FF0031",
               // fontFamily: "Inter_900Black",
               marginLeft: 6,
               fontFamily: "Poppins_600SemiBold",
               // fontWeight: "bold",
             }}
           >
-            FILTER
+            Cafe OZ
           </Text>
         </View>
       </View>
@@ -221,7 +222,7 @@ export default function MapScreen(props) {
 
       {/* Button  */}
       <Pressable style={styles.buttonSheet}>
-        <Text style={styles.text}>DONE</Text>
+        <Text style={styles.text}>I'M HERE</Text>
       </Pressable>
     </View>
   );
@@ -233,6 +234,14 @@ export default function MapScreen(props) {
       </View>
     </View>
   );
+
+  const markerRef = useRef();
+
+  const onRegionChangeComplete = () => {
+    if (markerRef && markerRef.current && markerRef.current.showCallout) {
+      markerRef.current.showCallout();
+    }
+  };
 
   if (!fontsLoaded[0]) {
     return <Text>Waiting ...</Text>;
@@ -248,14 +257,60 @@ export default function MapScreen(props) {
               latitudeDelta: 0.004757,
               longitudeDelta: 0.006866,
             }}
+            onRegionChangeComplete={onRegionChangeComplete}
           >
             <Marker
+              // ref={(ref) => {
+              //   this.marker = ref;
+              // }}
+              ref={markerRef}
               coordinate={{
                 latitude: props.latitude,
                 longitude: props.longitude,
               }}
+              // title="test"
+              // description="test"
               onPress={() => Bar.current.snapTo(0)}
-            ></Marker>
+            >
+              <Callout
+                style={{
+                  borderRadius: 20,
+                  backgroundColor: "transparent",
+                  height: 75,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  // display: "none",
+                }}
+              >
+                <View
+                  style={{
+                    // borderRadius: 20,
+                    height: "100%",
+                    // backgroundColor: "red",
+                    width: "70%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      paddingVertical: 4,
+                      color: "green",
+                    }}
+                  >
+                    Your location
+                  </Text>
+
+                  <View style={{ paddingBottom: 4 }}>
+                    <Avatar.Image
+                      source={require("../assets/img/Profile/Rectangle_2137.png")}
+                      size={30}
+                    />
+                  </View>
+                </View>
+              </Callout>
+            </Marker>
           </MapView>
         </View>
         <BottomSheet
@@ -437,7 +492,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_600SemiBold",
     letterSpacing: 0.25,
     color: "white",
   },
