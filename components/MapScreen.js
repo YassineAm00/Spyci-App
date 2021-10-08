@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import MapView , { Marker } from "react-native-maps";
+import MapView , { Marker , Callout } from "react-native-maps";
 
 
 export default function MapScreen(props) {

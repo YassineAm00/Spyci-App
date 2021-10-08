@@ -23,12 +23,58 @@ import {
 // import Slider from "rn-range-slider";
 import RangeSlider, { Slider } from "react-native-range-slider-expo";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from "@expo-google-fonts/poppins";
 
 export default function Profile({ navigation }) {
+  const fontsLoaded = useFonts({
+    // Poppins_100Thin,
+    // Poppins_100Thin_Italic,
+    // Poppins_200ExtraLight,
+    // Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    // Poppins_600SemiBold,
+    // Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    // Poppins_800ExtraBold,
+    // Poppins_800ExtraBold_Italic,
+    // Poppins_900Black,
+    // Poppins_900Black_Italic,
+  });
+
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
   const [value, setValue] = useState(0);
 
+
+  if (!fontsLoaded[0]) {
+    return <Text>Waiting ... </Text>;
+  } else {
   return (
     <>
       <View
@@ -48,6 +94,8 @@ export default function Profile({ navigation }) {
             flexDirection: "row",
             justifyContent: "flex-end",
             marginBottom: 7,
+            fontFamily: "Poppins_500Medium",
+
           }}
         >
           <Image
@@ -67,9 +115,10 @@ export default function Profile({ navigation }) {
               color: "#FF0031",
               alignSelf: "center",
               marginLeft: 7,
+              fontFamily: "Poppins_700Bold",
             }}
           >
-            PROFILE SPYCI
+            PROFILE SPYCIa
           </Text>
         </View>
         <Text style={{ textAlign: "right", fontSize: 11, color: "gray" }}>
@@ -80,7 +129,7 @@ export default function Profile({ navigation }) {
       <View style={styles.container}>
         <View style={styles.header}>
           {/* <Icon name="arrow-left" size={25} color="#FF0031" /> */}
-          <TouchableOpacity onPress={() => navigation.goBack()} >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome name="long-arrow-left" size={25} color="#FF0031" />
           </TouchableOpacity>
         </View>
@@ -204,8 +253,10 @@ export default function Profile({ navigation }) {
                 style={{
                   color: "#777777",
                   marginLeft: 20,
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                   fontSize: 11,
+              fontFamily: "Poppins_500Medium",
+
                 }}
               >
                 Name
@@ -403,7 +454,7 @@ export default function Profile({ navigation }) {
         <Text style={styles.text}>DONE</Text>
       </Pressable>
     </>
-  );
+  )};
 }
 
 const styles = StyleSheet.create({

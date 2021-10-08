@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import MapScreen from "./MapScreen";
 import Constants from "expo-constants";
-import * as Location from "expo-location";
 import { ListItem, RadioButton } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
@@ -45,10 +44,11 @@ import {
   Poppins_900Black,
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
+import * as Location from "expo-location";
 
 export default function Home({ navigation }) {
   // Bottom sheet
-  let BS =  useRef();
+  let BS = useRef();
   let fall = new Animated.Value(1);
 
   // const [fontsLoaded , setfontLoaded] = useState(useFonts({
@@ -90,7 +90,7 @@ export default function Home({ navigation }) {
     // Poppins_800ExtraBold_Italic,
     // Poppins_900Black,
     // Poppins_900Black_Italic,
-  })
+  });
 
   const renderInner = () => (
     <View style={styles.panel}>
@@ -291,27 +291,32 @@ export default function Home({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
+  let text = "Waiting...";
+
   useEffect(() => {
     console.log(fontsLoaded[0]);
     (async () => {
-      if (Platform.OS === "android" && !Constants.isDevice) {
-        setErrorMsg(
-          "Oops, this will not work on Snack in an Android emulator. Try it on your device!"
-        );
-        return;
-      }
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
         return;
       }
 
+      // console.log(Location.watchPositionAsync.bind(null, {}));
+      // let [lct] = {};
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      // console.log(JSON.stringify(location));
+      // setTimeout(
+      //   async() =>
+      //     Location.getCurrentPositionAsync({}).then((location) => {
+      //       lct = location;
+      //     }),
+      //   2000
+      // );
+      // setLocation(location);
     })();
   }, []);
 
-  let text = "Waiting...";
   let latitude = {};
   let longitude = {};
   if (errorMsg) {
@@ -319,9 +324,8 @@ export default function Home({ navigation }) {
   } else if (location) {
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
-    // alert(JSON.stringify(location.coords.longitude));
+    alert(JSON.stringify(location.coords.longitude));
   }
-
   if (!fontsLoaded[0]) {
     return <Text>{text}</Text>;
   } else {
@@ -361,7 +365,8 @@ export default function Home({ navigation }) {
 
         {/* :::::::::::: Map :::::::::::: */}
         {location ? (
-          <MapScreen latitude={latitude} longitude={longitude} />
+          // <MapScreen latitude={latitude} longitude={longitude} />.
+          <Text>Test</Text>
         ) : (
           <Text>{text}</Text>
         )}
@@ -395,7 +400,7 @@ export default function Home({ navigation }) {
           style={{ height: 700 }}
         />
       </View>
-    ) 
+    );
     // : <AppLoading />;
   }
 }
@@ -408,6 +413,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
     zIndex: 0,
+    // fontFamily: 'Poppins_500Medium'
   },
   header: {
     width: "80%",
@@ -431,8 +437,8 @@ const styles = StyleSheet.create({
   },
   header__text: {
     color: "#D1D3D4",
-    marginTop: 3, 
-    fontFamily: 'Poppins_500Medium'
+    marginTop: 3,
+    fontFamily: "Poppins_500Medium",
   },
   headerItem: {
     flex: 1,
@@ -466,8 +472,7 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 10,
     backgroundColor: "transparent",
-    fontFamily: 'Poppins_500Medium'
-
+    fontFamily: "Poppins_500Medium",
   },
   search__icon: {
     width: "10%",
