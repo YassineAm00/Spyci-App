@@ -54,6 +54,7 @@ export default function Home({ navigation }) {
   let fall = new AnimatedFall.Value(1);
   const [checked, setChecked] = React.useState("first");
   const [Fiter, setFilter] = useState(false);
+  const [bottomSheet, setbottomSheet] = useState(false);
 
   // const [fontsLoaded , setfontLoaded] = useState(useFonts({
   //   // Poppins_100Thin,
@@ -111,7 +112,12 @@ export default function Home({ navigation }) {
           zIndex: 99999999,
         }}
       >
-        <TouchableOpacity onPress={() => BS.current.snapTo(1)}>
+        <TouchableOpacity
+          onPress={() => {
+            BS.current.snapTo(1);
+            setbottomSheet(false);
+          }}
+        >
           <Feather name="x" size={24} color="#FF0031" />
           {/* <Text>test</Text> */}
         </TouchableOpacity>
@@ -270,136 +276,6 @@ export default function Home({ navigation }) {
     </View>
   );
 
-  const renderBar = () => (
-    <View style={styles.panel}>
-      <View
-        style={{
-          alignItems: "center",
-          // backgroundColor: "yellow",
-          borderBottomWidth: 1,
-          borderBottomColor: "#E5E5E5",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 15,
-          paddingHorizontal: 20,
-          zIndex: 99999999,
-        }}
-      >
-        <TouchableHighlight>
-          <Feather name="x" size={24} color="#FF0031" />
-          {/* <Text>test</Text> */}
-        </TouchableHighlight>
-
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around",
-          }}
-        >
-          <AntDesign name="filter" size={24} color="#FF0031" />
-          <Text
-            style={{
-              color: "gray",
-              // fontFamily: "Inter_900Black",
-              fontWeight: "bold",
-              marginLeft: 6,
-            }}
-          >
-            FILTER
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          height: 150,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            width: "45%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <Text>Test</Text> */}
-          <Image
-            style={{
-              height: 100,
-              width: 100,
-              // borderRadius: 10,
-              // position: "relative",
-            }}
-            source={require("../assets/img/Home/Image_2.png")}
-          />
-        </View>
-        <View style={{ width: "55%", flexDirection: "column" }}>
-          <View
-            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
-          >
-            <Entypo
-              name="location-pin"
-              // style={{  }}
-              size={26}
-              color="#FF0031"
-              style={{ marginRight: 10 }}
-            />
-            <View>
-              <Text style={{ fontSize: 12, color: "gray" }}>25 Van Gogh</Text>
-              <Text style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}>
-                75000 Paris
-              </Text>
-            </View>
-            <View
-              style={{
-                marginLeft: 15,
-                height: "50%",
-                backgroundColor: "red",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ fontSize: 12, color: "gray", padding: 0 }}>
-                <Text
-                  style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}
-                >
-                  4
-                </Text>{" "}
-                Km
-              </Text>
-              <Text style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}>
-                away
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
-          >
-            <Feather
-              name="user"
-              size={26}
-              style={{ marginRight: 10 }}
-              color="#FF0031"
-            />
-            <View>
-              <Text style={{ fontSize: 12, color: "gray" }}>
-                23 people is here
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Button  */}
-      <Pressable style={styles.buttonSheet}>
-        <Text style={styles.text}>DONE</Text>
-      </Pressable>
-    </View>
-  );
-
   const renderHeader = () => (
     <View style={styles.headersheet}>
       <View style={styles.panelHeader}>
@@ -443,6 +319,14 @@ export default function Home({ navigation }) {
     })();
   }, []);
 
+  const Test = () => {
+    setbottomSheet(true);
+    // setFilter();
+    setTimeout(() => {
+      BS.current.snapTo(0);
+    }, 500);
+  };
+
   let latitude = {};
   let longitude = {};
   if (errorMsg) {
@@ -463,7 +347,9 @@ export default function Home({ navigation }) {
             // title="test"
             style={styles.headerItem}
             className="col-lg-4"
-            onPress={() => BS.current.snapTo(0)}
+            onPress={() => {
+              Test();
+            }}
           >
             {/* <Icon name="filter" size={30} color="#D31245" /> */}
             <AntDesign name="filter" size={30} color="#D1D3D4" />
@@ -519,17 +405,23 @@ export default function Home({ navigation }) {
         </View>
 
         {/* :::::::::::: Bottom sheet :::::::::::: */}
-        <BottomSheet
-          ref={BS}
-          snapPoints={["80%", "0%"]}
-          renderContent={renderInner}
-          renderHeader={renderHeader}
-          initialSnap={1}
-          callbackNode={fall}
-          enabledGestureInteraction={true}
-          enabledContentGestureInteraction={false}
-          style={{ height: 700 }}
-        />
+        {bottomSheet ? (
+          <BottomSheet
+            ref={BS}
+            snapPoints={["80%", "0%"]}
+            renderContent={renderInner}
+            renderHeader={renderHeader}
+            initialSnap={1}
+            callbackNode={fall}
+            enabledGestureInteraction={true}
+            enabledContentGestureInteraction={false}
+            style={{ height: 700 }}
+          />
+        ) : (
+          <>
+            <Text>Test</Text>
+          </>
+        )}
       </View>
     );
     // : <AppLoading />;
@@ -670,7 +562,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "gray",
+    backgroundColor: "#D3D3D3",
     marginBottom: 10,
   },
   panelTitle: {

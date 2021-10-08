@@ -180,12 +180,12 @@ export default function MapScreen(props) {
           {/* <Text>Test</Text> */}
           <Image
             style={{
-              height: 100,
-              width: 100,
+              height: 50,
+              width: 50,
               // borderRadius: 10,
               // position: "relative",
             }}
-            source={require("../assets/img/Home/Image_2.png")}
+            source={require("../assets/img/Home/michal-mancewicz-_wdOjxXPxUU-unsplash.jpg")}
           />
         </View>
         <View style={{ width: "55%", flexDirection: "column" }}>
@@ -576,7 +576,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "gray",
+    backgroundColor: "#D3D3D3",
     marginBottom: 10,
   },
   panelTitle: {
