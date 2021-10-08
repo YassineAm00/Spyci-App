@@ -12,15 +12,17 @@ import {
   TouchableHighlight,
   Image,
   Pressable,
+  Modal,
+  Animated
 } from "react-native";
 import MapScreen from "./MapScreen";
 import Constants from "expo-constants";
 import { ListItem, RadioButton } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
-import Animated from "react-native-reanimated";
+import AnimatedFall from "react-native-reanimated";
 import RangeSlider, { Slider } from "react-native-range-slider-expo";
 import MapView, { Marker } from "react-native-maps";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, Entypo } from "@expo/vector-icons";
 import FilterComponent from "./Filter";
 import { AppLoading } from "expo";
 import {
@@ -46,10 +48,12 @@ import {
 } from "@expo-google-fonts/poppins";
 import * as Location from "expo-location";
 
+
 export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
-  let fall = new Animated.Value(1);
+  let fall = new AnimatedFall.Value(1);
+
 
   // const [fontsLoaded , setfontLoaded] = useState(useFonts({
   //   // Poppins_100Thin,
@@ -274,6 +278,136 @@ export default function Home({ navigation }) {
     </View>
   );
 
+  const renderBar = () => (
+    <View style={styles.panel}>
+      <View
+        style={{
+          alignItems: "center",
+          // backgroundColor: "yellow",
+          borderBottomWidth: 1,
+          borderBottomColor: "#E5E5E5",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          padding: 15,
+          paddingHorizontal: 20,
+          zIndex: 99999999,
+        }}
+      >
+        <TouchableHighlight>
+          <Feather name="x" size={24} color="#FF0031" />
+          {/* <Text>test</Text> */}
+        </TouchableHighlight>
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          <AntDesign name="filter" size={24} color="#FF0031" />
+          <Text
+            style={{
+              color: "gray",
+              // fontFamily: "Inter_900Black",
+              fontWeight: "bold",
+              marginLeft: 6,
+            }}
+          >
+            FILTER
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          height: 150,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            width: "45%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* <Text>Test</Text> */}
+          <Image
+            style={{
+              height: 100,
+              width: 100,
+              // borderRadius: 10,
+              // position: "relative",
+            }}
+            source={require("../assets/img/Home/Image_2.png")}
+          />
+        </View>
+        <View style={{ width: "55%", flexDirection: "column" }}>
+          <View
+            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
+          >
+            <Entypo
+              name="location-pin"
+              // style={{  }}
+              size={26}
+              color="#FF0031"
+              style={{ marginRight: 10 }}
+            />
+            <View>
+              <Text style={{ fontSize: 12, color: "gray" }}>25 Van Gogh</Text>
+              <Text style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}>
+                75000 Paris
+              </Text>
+            </View>
+            <View
+              style={{
+                marginLeft: 15,
+                height: "50%",
+                backgroundColor: "red",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "gray", padding: 0 }}>
+                <Text
+                  style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}
+                >
+                  4
+                </Text>{" "}
+                Km
+              </Text>
+              <Text style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}>
+                away
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
+          >
+            <Feather
+              name="user"
+              size={26}
+              style={{ marginRight: 10 }}
+              color="#FF0031"
+            />
+            <View>
+              <Text style={{ fontSize: 12, color: "gray" }}>
+                23 people is here
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      {/* Button  */}
+      <Pressable style={styles.buttonSheet}>
+        <Text style={styles.text}>DONE</Text>
+      </Pressable>
+    </View>
+  );
+
   const renderHeader = () => (
     <View style={styles.headersheet}>
       <View style={styles.panelHeader}>
@@ -294,7 +428,7 @@ export default function Home({ navigation }) {
   let text = "Waiting...";
 
   useEffect(() => {
-    console.log(fontsLoaded[0]);
+    // console.log(fontsLoaded[0]);
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -305,6 +439,7 @@ export default function Home({ navigation }) {
       // console.log(Location.watchPositionAsync.bind(null, {}));
       // let [lct] = {};
       let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
       // console.log(JSON.stringify(location));
       // setTimeout(
       //   async() =>
@@ -313,7 +448,6 @@ export default function Home({ navigation }) {
       //     }),
       //   2000
       // );
-      // setLocation(location);
     })();
   }, []);
 
@@ -324,7 +458,7 @@ export default function Home({ navigation }) {
   } else if (location) {
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
-    alert(JSON.stringify(location.coords.longitude));
+    // alert(JSON.stringify(location.coords.longitude));
   }
   if (!fontsLoaded[0]) {
     return <Text>{text}</Text>;
@@ -346,12 +480,16 @@ export default function Home({ navigation }) {
               {/* atest */}
             </Text>
           </TouchableOpacity>
-          <View style={styles.headerItem} className=" col-lg-4 ">
+          <TouchableOpacity
+            style={styles.headerItem}
+            className=" col-lg-4 "
+            onPress={() => navigation.navigate("Filter")}
+          >
             {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
             {/* <AntDesign name="message-circle" size={32} color="green" /> */}
             <Feather name="message-circle" size={30} color="#D1D3D4" />
             <Text style={styles.header__text}>MESSENGER</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.headerItem}
             className=" col-lg-4 "
@@ -365,8 +503,8 @@ export default function Home({ navigation }) {
 
         {/* :::::::::::: Map :::::::::::: */}
         {location ? (
-          // <MapScreen latitude={latitude} longitude={longitude} />.
-          <Text>Test</Text>
+          <MapScreen latitude={latitude} longitude={longitude} />
+          // <Text>Test</Text>
         ) : (
           <Text>{text}</Text>
         )}
@@ -399,6 +537,8 @@ export default function Home({ navigation }) {
           enabledGestureInteraction={true}
           style={{ height: 700 }}
         />
+
+        
       </View>
     );
     // : <AppLoading />;
@@ -578,4 +718,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 7,
   },
+
 });
