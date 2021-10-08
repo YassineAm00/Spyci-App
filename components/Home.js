@@ -13,7 +13,7 @@ import {
   Image,
   Pressable,
   Modal,
-  Animated
+  Animated,
 } from "react-native";
 import MapScreen from "./MapScreen";
 import Constants from "expo-constants";
@@ -48,12 +48,12 @@ import {
 } from "@expo-google-fonts/poppins";
 import * as Location from "expo-location";
 
-
 export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
   let fall = new AnimatedFall.Value(1);
-
+  const [checked, setChecked] = React.useState("first");
+  const [Fiter, setFilter] = useState(false);
 
   // const [fontsLoaded , setfontLoaded] = useState(useFonts({
   //   // Poppins_100Thin,
@@ -111,10 +111,10 @@ export default function Home({ navigation }) {
           zIndex: 99999999,
         }}
       >
-        <TouchableHighlight>
+        <TouchableOpacity onPress={() => BS.current.snapTo(1)}>
           <Feather name="x" size={24} color="#FF0031" />
           {/* <Text>test</Text> */}
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         <View
           style={{
@@ -174,27 +174,22 @@ export default function Home({ navigation }) {
             style={{
               height: 50,
               width: 50,
-              // borderRadius: 10,
-              // position: "relative",
+              marginLeft: 20,
             }}
             source={require("../assets/img/Home/Man.png")}
           />
 
           <View
             style={{
-              // backgroundColor: "green",
-              // justifyContent: "flex-end",
               flexDirection: "row",
               alignItems: "center",
-              // backgroundColor: "red",
               padding: 0,
             }}
           >
             <RadioButton
               value="first"
-              // style={{ backgroundColor: "red" }}
-              // status={checked === "first" ? "checked" : "unchecked"}
-              // onPress={() => setChecked("first")}
+              status={checked === "first" ? "checked" : "unchecked"}
+              onPress={() => setChecked("first")}
             />
             <Text style={{ fontSize: 15, color: "gray" }}>Man</Text>
           </View>
@@ -203,7 +198,6 @@ export default function Home({ navigation }) {
         {/* Woman */}
         <View
           style={{
-            // backgroundColor: "black",
             justifyContent: "center",
             alignItems: "center",
             width: "30%",
@@ -213,8 +207,6 @@ export default function Home({ navigation }) {
             style={{
               height: 50,
               width: 50,
-              // borderRadius: 10,
-              // position: "relative",
             }}
             source={require("../assets/img/Home/Woman.png")}
           />
@@ -229,10 +221,10 @@ export default function Home({ navigation }) {
             }}
           >
             <RadioButton
-              value="first"
-              // style={{ backgroundColor: "red" }}
-              // status={checked === "first" ? "checked" : "unchecked"}
-              // onPress={() => setChecked("first")}
+              value="second"
+              style={{ color: "red" }}
+              status={checked === "second" ? "checked" : "unchecked"}
+              onPress={() => setChecked("second")}
             />
             <Text style={{ fontSize: 15, color: "gray" }}>Woman</Text>
           </View>
@@ -504,8 +496,8 @@ export default function Home({ navigation }) {
         {/* :::::::::::: Map :::::::::::: */}
         {location ? (
           <MapScreen latitude={latitude} longitude={longitude} />
-          // <Text>Test</Text>
         ) : (
+          // <Text>Test</Text>
           <Text>{text}</Text>
         )}
 
@@ -535,10 +527,9 @@ export default function Home({ navigation }) {
           initialSnap={1}
           callbackNode={fall}
           enabledGestureInteraction={true}
+          enabledContentGestureInteraction={false}
           style={{ height: 700 }}
         />
-
-        
       </View>
     );
     // : <AppLoading />;
@@ -718,5 +709,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 7,
   },
-
 });
