@@ -180,12 +180,12 @@ export default function MapScreen(props) {
           {/* <Text>Test</Text> */}
           <Image
             style={{
-              height: 50,
-              width: 50,
+              height: 150,
+              width: 150,
               // borderRadius: 10,
               // position: "relative",
             }}
-            source={require("../assets/img/Home/michal-mancewicz-_wdOjxXPxUU-unsplash.jpg")}
+            source={require("../assets/img/Home/7-layers.png")}
           />
         </View>
         <View style={{ width: "55%", flexDirection: "column" }}>
