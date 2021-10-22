@@ -398,6 +398,36 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+import {
+  AntDesign,
+  FontAwesome,
+  Foundation,
+  Feather,
+  Ionicons,
+  MaterialCommunityIcons,
+  Entypo,
+} from "@expo/vector-icons";
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from "@expo-google-fonts/poppins";
 
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -408,9 +438,8 @@ const ModalPoup = ({ visible, children }) => {
   }, [visible]);
   const toggleModal = () => {
     if (visible) {
-      
       setShowModal(true);
-      
+
       Animated.spring(scaleValue, {
         toValue: 1,
         duration: 300,
@@ -427,9 +456,7 @@ const ModalPoup = ({ visible, children }) => {
       //       useNativeDriver: true,
       //     }).start();
       // }, 2000);
-
-    }
-     else {
+    } else {
       setTimeout(() => setShowModal(false), 200);
       Animated.timing(scaleValue, {
         toValue: 0,
@@ -454,20 +481,53 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-const Filter = () => {
+const Filter = ({ navigation }) => {
+  const fontsLoaded = useFonts({
+    // Poppins_100Thin,
+    // Poppins_100Thin_Italic,
+    // Poppins_200ExtraLight,
+    // Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    // Poppins_700Bold,
+    // Poppins_700Bold_Italic,
+    // Poppins_800ExtraBold,
+    // Poppins_800ExtraBold_Italic,
+    // Poppins_900Black,
+    // Poppins_900Black_Italic,
+  });
   const [visible, setVisible] = React.useState(false);
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      {/* {setTimeout(
+
+  if (!fontsLoaded[0]) {
+    return <Text>waiting ...</Text>;
+  } else {
+    return (
+      <>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ position: "absolute", top: 40, left: 25 }}
+        >
+          <FontAwesome name="long-arrow-left" size={25} color="#FF0031" />
+        </TouchableOpacity>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          {/* {setTimeout(
         () => {( */}
-          <ModalPoup visible={visible}>
+          {/* <ModalPoup visible={visible}>
             <View style={{ alignItems: "center" }}>
               <View style={styles.header}>
                 <TouchableOpacity onPress={() => setVisible(false)}>
-                  {/* <Image
+                  <Image
                 source={require('./assets/x.png')}
                 style={{height: 30, width: 30}}
-              /> */}
+              /> 
                   <Text>Test</Text>
                 </TouchableOpacity>
               </View>
@@ -476,7 +536,7 @@ const Filter = () => {
               {/* <Image
             source={require('./assets/success.png')}
             style={{height: 150, width: 150, marginVertical: 10}}
-          /> */}
+          /> 
               <Text>Test</Text>
             </View>
 
@@ -485,15 +545,34 @@ const Filter = () => {
             >
               Congratulations registration was successful
             </Text>
-          </ModalPoup>
-        {/* )},
+          </ModalPoup>*/}
+          {/* )},
         2000
       )} */}
-      <Button title="Open Modal" onPress={() => {setVisible(true); setTimeout(() => {
-        setVisible(false);
-      }, 2000);}} />
-    </View>
-  );
+          {/* <Button
+        title="Open Modal"
+        onPress={() => {
+          setVisible(true);
+          setTimeout(() => {
+            setVisible(false);
+          }, 2000);
+        }}
+      /> */}
+          <Image
+            style={{
+              height: 200,
+              width: 200,
+              marginLeft: 20,
+            }}
+            source={require("../assets/img/Home/7-layers.png")}
+          />
+          <Text style={{ fontFamily: "Poppins_600SemiBold", color: "#FF0031" }}>
+            Au moment de restriction
+          </Text>
+        </View>
+      </>
+    );
+  }
 };
 
 export default Filter;

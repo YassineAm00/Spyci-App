@@ -9,6 +9,8 @@ import {
   TouchableHighlight,
   Image,
   Pressable,
+  Modal,
+  Animated,
 } from "react-native";
 import MapScreen from "./MapScreen";
 import { RadioButton } from "react-native-paper";
@@ -28,7 +30,6 @@ import {
 import * as Location from "expo-location";
 import { BoxShadow } from "react-native-shadow"
 
-
 export default function Home({ navigation }) {
 
   // shadow settings 
@@ -47,6 +48,30 @@ export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
   let fall = new AnimatedFall.Value(1);
+  const [checked, setChecked] = React.useState("first");
+  const [Fiter, setFilter] = useState(false);
+  const [bottomSheet, setbottomSheet] = useState(false);
+
+  // const [fontsLoaded , setfontLoaded] = useState(useFonts({
+  //   // Poppins_100Thin,
+  //   // Poppins_100Thin_Italic,
+  //   // Poppins_200ExtraLight,
+  //   // Poppins_200ExtraLight_Italic,
+  //   Poppins_300Light,
+  //   Poppins_300Light_Italic,
+  //   Poppins_400Regular,
+  //   Poppins_400Regular_Italic,
+  //   // Poppins_500Medium,
+  //   // Poppins_500Medium_Italic,
+  //   // Poppins_600SemiBold,
+  //   // Poppins_600SemiBold_Italic,
+  //   // Poppins_700Bold,
+  //   // Poppins_700Bold_Italic,
+  //   // Poppins_800ExtraBold,
+  //   // Poppins_800ExtraBold_Italic,
+  //   // Poppins_900Black,
+  //   // Poppins_900Black_Italic,
+  // }));
   const fontsLoaded = useFonts({
     Poppins_300Light,
     Poppins_300Light_Italic,
@@ -76,6 +101,15 @@ export default function Home({ navigation }) {
         <TouchableHighlight style={{ position: 'absolute' , left: 20 }}>
           <Feather name="x" size={24} color="#FF0031" />
         </TouchableHighlight>
+        <TouchableOpacity
+          onPress={() => {
+            BS.current.snapTo(1);
+            setbottomSheet(false);
+          }}
+        >
+          <Feather name="x" size={24} color="#FF0031" />
+          {/* <Text>test</Text> */}
+        </TouchableOpacity>
 
         <View
           style={{
@@ -157,6 +191,8 @@ export default function Home({ navigation }) {
           >
             <RadioButton
               value="first"
+              status={checked === "first" ? "checked" : "unchecked"}
+              onPress={() => setChecked("first")}
             />
             <Text style={{ fontSize: 15, color: "gray" }}>Man</Text>
           </View>
@@ -189,8 +225,10 @@ export default function Home({ navigation }) {
             }}
           >
             <RadioButton
-            style={{ padding: 0 }}
-              value="first"
+              value="second"
+              style={{ color: "red" }}
+              status={checked === "second" ? "checked" : "unchecked"}
+              onPress={() => setChecked("second")}
             />
             <Text style={{ fontSize: 15, color: "gray" }}>Woman</Text>
           </View>
@@ -242,136 +280,6 @@ export default function Home({ navigation }) {
 
 );
 
-  const renderBar = () => (
-    <View style={styles.panel}>
-      <View
-        style={{
-          alignItems: "center",
-          // backgroundColor: "yellow",
-          borderBottomWidth: 1,
-          borderBottomColor: "#E5E5E5",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 15,
-          paddingHorizontal: 20,
-          zIndex: 99999999,
-        }}
-      >
-        <TouchableHighlight>
-          <Feather name="x" size={24} color="#FF0031" />
-          {/* <Text>test</Text> */}
-        </TouchableHighlight>
-
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around",
-          }}
-        >
-          <AntDesign name="filter" size={24} color="#FF0031" />
-          <Text
-            style={{
-              color: "gray",
-              // fontFamily: "Inter_900Black",
-              fontWeight: "bold",
-              marginLeft: 6,
-            }}
-          >
-            FILTER
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          height: 150,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            width: "45%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <Text>Test</Text> */}
-          <Image
-            style={{
-              height: 100,
-              width: 100,
-              // borderRadius: 10,
-              // position: "relative",
-            }}
-            source={require("../assets/img/Home/Image_2.png")}
-          />
-        </View>
-        <View style={{ width: "55%", flexDirection: "column" }}>
-          <View
-            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
-          >
-            <Entypo
-              name="location-pin"
-              // style={{  }}
-              size={26}
-              color="#FF0031"
-              style={{ marginRight: 10 }}
-            />
-            <View>
-              <Text style={{ fontSize: 12, color: "gray" }}>25 Van Gogh</Text>
-              <Text style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}>
-                75000 Paris
-              </Text>
-            </View>
-            <View
-              style={{
-                marginLeft: 15,
-                height: "50%",
-                backgroundColor: "red",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ fontSize: 12, color: "gray", padding: 0 }}>
-                <Text
-                  style={{ fontSize: 17, fontWeight: "bold", color: "gray" }}
-                >
-                  4
-                </Text>{" "}
-                Km
-              </Text>
-              <Text style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}>
-                away
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
-          >
-            <Feather
-              name="user"
-              size={26}
-              style={{ marginRight: 10 }}
-              color="#FF0031"
-            />
-            <View>
-              <Text style={{ fontSize: 12, color: "gray" }}>
-                23 people is here
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Button  */}
-      <Pressable style={styles.buttonSheet}>
-        <Text style={styles.text}>Done</Text>
-      </Pressable>
-    </View>
-  );
-
   const renderHeader = () => (
     <View style={styles.headersheet}>
       <View style={styles.panelHeader}>
@@ -407,6 +315,14 @@ export default function Home({ navigation }) {
     // console.log("-----> " , BS.current);
   }, []);
 
+  const Test = () => {
+    setbottomSheet(true);
+    // setFilter();
+    setTimeout(() => {
+      BS.current.snapTo(0);
+    }, 500);
+  };
+
   let latitude = {};
   let longitude = {};
   if (errorMsg) {
@@ -427,7 +343,9 @@ export default function Home({ navigation }) {
             // title="test"
             style={styles.headerItem}
             className="col-lg-4"
-            onPress={() => {BS.current.snapTo(0) ; console.log("-----> ");}}
+            onPress={() => {
+              Test();
+            }}
           >
             {/* <Icon name="filter" size={30} color="#D31245" /> */}
             {/* <AntDesign name="filter" size={30} color="#D1D3D4" /> */}
@@ -461,8 +379,8 @@ export default function Home({ navigation }) {
         {/* :::::::::::: Map :::::::::::: */}
         {/* {location ? (
           <MapScreen latitude={latitude} longitude={longitude} />
-          // <Text>Test</Text>
         ) : (
+          // <Text>Test</Text>
           <Text>{text}</Text>
         )} */}
 
@@ -642,7 +560,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "gray",
+    backgroundColor: "#D3D3D3",
     marginBottom: 10,
   },
   panelTitle: {
@@ -681,5 +599,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 7,
   },
-
 });

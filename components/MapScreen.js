@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
-  Animated
+  Animated,
 } from "react-native";
 import { Avatar } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
@@ -30,8 +30,6 @@ import {
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
 
-
-
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
@@ -41,9 +39,8 @@ const ModalPoup = ({ visible, children }) => {
   }, [visible]);
   const toggleModal = () => {
     if (visible) {
-      
       setShowModal(true);
-      
+
       Animated.spring(scaleValue, {
         toValue: 1,
         duration: 300,
@@ -60,9 +57,7 @@ const ModalPoup = ({ visible, children }) => {
       //       useNativeDriver: true,
       //     }).start();
       // }, 2000);
-
-    }
-     else {
+    } else {
       setTimeout(() => setShowModal(false), 200);
       Animated.timing(scaleValue, {
         toValue: 0,
@@ -86,8 +81,6 @@ const ModalPoup = ({ visible, children }) => {
     </Modal>
   );
 };
-
-
 
 export default function MapScreen(props) {
   const fontsLoaded = useFonts({
@@ -131,7 +124,7 @@ export default function MapScreen(props) {
           fontFamily: "Poppins_500Medium",
         }}
       >
-        <TouchableOpacity onPress={() => Bar.current.snapTo(1)} >
+        <TouchableOpacity onPress={() => Bar.current.snapTo(1)}>
           <Feather name="x" size={24} color="#FF0031" />
           {/* <Text>test</Text> */}
         </TouchableOpacity>
@@ -175,12 +168,12 @@ export default function MapScreen(props) {
           {/* <Text>Test</Text> */}
           <Image
             style={{
-              height: 100,
-              width: 100,
+              height: 150,
+              width: 150,
               // borderRadius: 10,
               // position: "relative",
             }}
-            source={require("../assets/img/Home/Image_2.png")}
+            source={require("../assets/img/Home/7-layers.png")}
           />
         </View>
         <View style={{ width: "55%", flexDirection: "column" }}>
@@ -232,7 +225,7 @@ export default function MapScreen(props) {
                   }}
                 >
                   4
-                </Text>{" "}
+                </Text>
                 Km
               </Text>
               <Text
@@ -271,9 +264,19 @@ export default function MapScreen(props) {
       </View>
 
       {/* Button  */}
-      <TouchableOpacity style={styles.buttonSheet} onPress={() => {setVisible(true); setTimeout(() => {
-      setVisible(false);
-    }, 2000); Bar.current.snapTo(1) ; setTest(true) ; setTest(true) ; onRegionChangeComplete() }}>
+      <TouchableOpacity
+        style={styles.buttonSheet}
+        onPress={() => {
+          setVisible(true);
+          setTimeout(() => {
+            setVisible(false);
+          }, 2000);
+          Bar.current.snapTo(1);
+          setTest(true);
+          // setTest(true);
+          // onRegionChangeComplete();
+        }}
+      >
         <Text style={styles.text}>I'M HERE</Text>
       </TouchableOpacity>
     </View>
@@ -288,10 +291,15 @@ export default function MapScreen(props) {
   );
 
   const markerRef = useRef();
-  const [ test , setTest ] = useState(false)
+  const [test, setTest] = useState(false);
 
   const onRegionChangeComplete = () => {
-    if (markerRef && markerRef.current && markerRef.current.showCallout() && test) {
+    if (
+      markerRef &&
+      markerRef.current &&
+      markerRef.current.showCallout() &&
+      test
+    ) {
       markerRef.current.showCallout();
       // markerRef.current.showCallout();
     }
@@ -322,50 +330,51 @@ export default function MapScreen(props) {
                 latitude: props.latitude,
                 longitude: props.longitude,
               }}
+              // style={{ borderRadius: 20 }}
               // title="test"
               // description="test"
               onPress={() => Bar.current.snapTo(0)}
             >
-              { test ? (
+              {test ? (
                 <Callout
-                style={{
-                  borderRadius: 20,
-                  backgroundColor: "transparent",
-                  height: 75,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: 'none',
-                }}
-              >
-                <View
-                  style={{
-                    // borderRadius: 20,
-                    height: "100%",
-                    // backgroundColor: "red",
-                    width: "70%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
+                  style={{ justifyContent: "center", alignItems: "center" }}
                 >
-                  <Text
+                  <View
                     style={{
-                      textAlign: "center",
-                      paddingVertical: 4,
-                      color: "green",
+                      // borderRadius: 20,
+                      width: "100%",
+                      height: 75,
+                      // backgroundColor: "red",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      // textAlign: "center",
+                      // zIndex: 2,
+                      // marginLeft: "auto",
+                      // marginRight: "auto",
+                      // alignSelf: "center",
                     }}
                   >
-                    Your location
-                  </Text>
-
-                  <View style={{ paddingBottom: 4 }}>
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        width: "70%",
+                        fontFamily: "Poppins_400Regular",
+                        color: "#00b712",
+                        // marginRight: 20,
+                      }}
+                    >
+                      Your location
+                    </Text>
                     <Avatar.Image
+                      // style={{ marginRight: 20 }}
                       source={require("../assets/img/Profile/Rectangle_2137.png")}
                       size={30}
                     />
                   </View>
-                </View>
-              </Callout>
-              ): <></> }
+                </Callout>
+              ) : (
+                <></>
+              )}
             </Marker>
           </MapView>
         </View>
@@ -382,23 +391,38 @@ export default function MapScreen(props) {
         />
         {/* Modal Popup  */}
         <ModalPoup visible={visible}>
-             <View style={{ alignItems: "center" }}>
-              <View style={styles.headerModal}>
-                <TouchableOpacity onPress={() => setVisible(false)}>
-                  <Text>Test</Text>
-                </TouchableOpacity>
-              </View>
+          {/* <View style={{ alignItems: "center" }}>
+            <View style={styles.headerModal}>
+              <TouchableOpacity onPress={() => setVisible(false)}>
+                <Text>Test</Text>
+              </TouchableOpacity>
             </View>
-            <View style={{ alignItems: "center" }}>
-              <Text>Test</Text>
-            </View> 
-
+          </View> */}
+          <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <Image
+              style={{
+                height: 150,
+                width: 150,
+                marginTop: 10,
+                // backgroundColor: "red",
+                // borderRadius: 10,
+                // position: "relative",
+              }}
+              source={require("../assets/img/Home/12-layers.png")}
+            />
             <Text
-              style={{ marginVertical: 30, fontSize: 20, textAlign: "center" }}
+              style={{
+                marginBottom: 30,
+                fontSize: 20,
+                textAlign: "center",
+                fontFamily: "Poppins_500Medium",
+                color: "#FF0031",
+              }}
             >
-              Congratulations registration was successful
+              YOU ARE HERE !
             </Text>
-          </ModalPoup>
+          </View>
+        </ModalPoup>
       </>
     );
   }
@@ -540,7 +564,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "gray",
+    backgroundColor: "#D3D3D3",
     marginBottom: 10,
   },
   panelTitle: {
@@ -581,20 +605,22 @@ const styles = StyleSheet.create({
     marginVertical: 7,
   },
 
-
-  // Modal 
+  // Modal
   modalBackGround: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
     alignItems: "center",
+    // height: "30%",
   },
   modalContainer: {
-    width: "80%",
+    width: "70%",
+    height: "30%",
     backgroundColor: "white",
-    paddingHorizontal: 20,
-    paddingVertical: 30,
+    // paddingVertical: 100,
     borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
     elevation: 20,
   },
   headerModal: {
