@@ -78,6 +78,7 @@ export default function Profile({ navigation }) {
     // Poppins_800ExtraBold_Italic,
     // Poppins_900Black,
     // Poppins_900Black_Italic,
+    "main-font": require("../../assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
     "Test-Font": require("../../assets/fonts/Nunito-SemiBold.ttf"),
   });
 
@@ -99,8 +100,16 @@ export default function Profile({ navigation }) {
               </TouchableOpacity>
             </View>
             {/* <Text>Test</Text> */}
-            <Text>My Profile</Text>
-            <Feather name="settings" size={28} color="#FF0031" />
+            <Text
+              style={{
+                fontFamily: "main-font",
+                color: Colors.MAIN_COLOR,
+                fontSize: 25,
+              }}
+            >
+              My Profile
+            </Text>
+            <Feather name="settings" size={25} color="#FF0031" />
           </View>
           <Text style={Styles.Descriprion}>
             Let's add images of you doing exciting staff to spice up your

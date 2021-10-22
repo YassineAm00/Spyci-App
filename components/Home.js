@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Platform,
   Text,
   View,
   StyleSheet,
   Dimensions,
   TextInput,
-  Alert,
-  Button,
   TouchableOpacity,
   TouchableHighlight,
   Image,
@@ -16,39 +13,37 @@ import {
   Animated,
 } from "react-native";
 import MapScreen from "./MapScreen";
-import Constants from "expo-constants";
-import { ListItem, RadioButton } from "react-native-paper";
+import { RadioButton } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
-import AnimatedFall from "react-native-reanimated";
+import AnimatedFall, { color } from "react-native-reanimated";
 import RangeSlider, { Slider } from "react-native-range-slider-expo";
-import MapView, { Marker } from "react-native-maps";
-import { AntDesign, Feather, Entypo } from "@expo/vector-icons";
-import FilterComponent from "./Filter";
-import { AppLoading } from "expo";
+import { AntDesign, Feather, FontAwesome } from "@expo/vector-icons";
 import {
   useFonts,
-  Poppins_100Thin,
-  Poppins_100Thin_Italic,
-  Poppins_200ExtraLight,
-  Poppins_200ExtraLight_Italic,
   Poppins_300Light,
   Poppins_300Light_Italic,
   Poppins_400Regular,
   Poppins_400Regular_Italic,
   Poppins_500Medium,
   Poppins_500Medium_Italic,
-  Poppins_600SemiBold,
-  Poppins_600SemiBold_Italic,
-  Poppins_700Bold,
-  Poppins_700Bold_Italic,
-  Poppins_800ExtraBold,
-  Poppins_800ExtraBold_Italic,
-  Poppins_900Black,
-  Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
 import * as Location from "expo-location";
+import { BoxShadow } from "react-native-shadow";
 
 export default function Home({ navigation }) {
+  // shadow settings
+  const shadowOpt = {
+    width: 100,
+    height: 300,
+    color: "#000",
+    border: 2,
+    radius: 3,
+    opacity: 0.1,
+    x: 0,
+    y: 3,
+    // style:{styles.panel}
+  };
+
   // Bottom sheet
   let BS = useRef();
   let fall = new AnimatedFall.Value(1);
@@ -77,68 +72,68 @@ export default function Home({ navigation }) {
   //   // Poppins_900Black_Italic,
   // }));
   const fontsLoaded = useFonts({
-    // Poppins_100Thin,
-    // Poppins_100Thin_Italic,
-    // Poppins_200ExtraLight,
-    // Poppins_200ExtraLight_Italic,
     Poppins_300Light,
     Poppins_300Light_Italic,
     Poppins_400Regular,
     Poppins_400Regular_Italic,
     Poppins_500Medium,
     Poppins_500Medium_Italic,
-    // Poppins_600SemiBold,
-    // Poppins_600SemiBold_Italic,
-    // Poppins_700Bold,
-    // Poppins_700Bold_Italic,
-    // Poppins_800ExtraBold,
-    // Poppins_800ExtraBold_Italic,
-    // Poppins_900Black,
-    // Poppins_900Black_Italic,
+    "main-font": require("../assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
   });
 
   const renderInner = () => (
+    // <BoxShadow setting={shadowOpt}>
     <View style={styles.panel}>
       <View
         style={{
           alignItems: "center",
-          // backgroundColor: "yellow",
           borderBottomWidth: 1,
           borderBottomColor: "#E5E5E5",
           flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 15,
+          justifyContent: "center",
+          position: "relative",
+          padding: 10,
           paddingHorizontal: 20,
           zIndex: 99999999,
         }}
       >
+        {/* <TouchableHighlight style={{ position: "absolute", left: 20 }}>
+          <Feather name="x" size={24} color="#FF0031" />
+        </TouchableHighlight> */}
         <TouchableOpacity
+          style={{ position: "absolute", left: 20 }}
           onPress={() => {
             BS.current.snapTo(1);
             setbottomSheet(false);
           }}
         >
           <Feather name="x" size={24} color="#FF0031" />
-          {/* <Text>test</Text> */}
         </TouchableOpacity>
 
         <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around",
-          }}
+          style={
+            {
+              // flexDirection: "row",
+              // alignItems: "center",
+              // justifyContent: "space-around",
+              // alignSelf: 'center'
+            }
+          }
         >
-          <AntDesign name="filter" size={24} color="#FF0031" />
           <Text
             style={{
               color: "gray",
-              // fontFamily: "Inter_900Black",
-              fontWeight: "bold",
-              marginLeft: 6,
+              // fontWeight: "bold",
+              // marginLeft: 6,
+              fontFamily: "main-font",
+              fontSize: 25,
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#FF0031",
+              // textAlign: 'center'
             }}
           >
-            FILTER
+            Filter
           </Text>
         </View>
       </View>
@@ -147,20 +142,20 @@ export default function Home({ navigation }) {
           paddingHorizontal: 25,
           paddingTop: 20,
           paddingBottom: 20,
-          fontWeight: "bold",
-          color: "gray",
+          // fontWeight: "bold",
           marginBottom: 0,
+          fontSize: 16,
+          fontFamily: "main-font",
+          color: "#2DE04C",
         }}
       >
-        INTERESTING
+        Interesting
       </Text>
       <View
         style={{
-          // backgroundColor: "red",
           alignSelf: "center",
           flexDirection: "row",
           justifyContent: "space-around",
-          // paddingHorizontal: 20,
           width: "90%",
           borderBottomWidth: 2,
           borderBottomColor: "#E5E5E5",
@@ -170,7 +165,6 @@ export default function Home({ navigation }) {
         {/* Man */}
         <View
           style={{
-            // backgroundColor: "black",
             justifyContent: "center",
             alignItems: "center",
             width: "30%",
@@ -180,7 +174,6 @@ export default function Home({ navigation }) {
             style={{
               height: 50,
               width: 50,
-              marginLeft: 20,
             }}
             source={require("../assets/img/Home/Man.png")}
           />
@@ -190,6 +183,9 @@ export default function Home({ navigation }) {
               flexDirection: "row",
               alignItems: "center",
               padding: 0,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              width: "90%",
             }}
           >
             <RadioButton
@@ -219,11 +215,11 @@ export default function Home({ navigation }) {
 
           <View
             style={{
-              // backgroundColor: "green",
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              // backgroundColor: "red",
+              flexDirection: "row",
+              justifyContent: "flex-start",
             }}
           >
             <RadioButton
@@ -244,35 +240,40 @@ export default function Home({ navigation }) {
             paddingHorizontal: 25,
             paddingTop: 20,
             paddingBottom: 0,
-            fontWeight: "bold",
-            color: "gray",
             marginBottom: 0,
+            fontSize: 16,
+            fontFamily: "main-font",
+            color: "#2DE04C",
           }}
         >
-          AGE
+          Age
         </Text>
         <RangeSlider
           min={18}
-          max={100}
+          max={45}
           step={1}
           fromValueOnChange={(value) => setFromValue(value)}
           toValueOnChange={(value) => setToValue(value)}
           initialFromValue={11}
-          styleSize={15}
+          styleSize={12}
           fromKnobColor="#FF0031"
           toKnobColor="#FF0031"
+          knobColor="green"
           inRangeBarColor="#FF0031"
-          outOfRangeBarColor="gray"
+          outOfRangeBarColor="#D1D1D1"
+          rangeLabelsTextColor="#D1D1D1"
           valueLabelsBackgroundColor="#FF0031"
           initialFromValue={18}
-          initialToValue={100}
+          initialToValue={45}
         />
       </View>
 
       {/* Button  */}
-      <Pressable style={styles.buttonSheet}>
-        <Text style={styles.text}>DONE</Text>
-      </Pressable>
+      <View style={{ position: "absolute", bottom: 85, width: "100%" }}>
+        <Pressable style={styles.buttonSheet}>
+          <Text style={styles.text}>Done</Text>
+        </Pressable>
+      </View>
     </View>
   );
 
@@ -297,25 +298,25 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     // console.log(fontsLoaded[0]);
-    // (async () => {
-    //   let { status } = await Location.requestForegroundPermissionsAsync();
-    //   if (status !== "granted") {
-    //     setErrorMsg("Permission to access location was denied");
-    //     return;
-    //   }
-    //   // console.log(Location.watchPositionAsync.bind(null, {}));
-    //   // let [lct] = {};
-    //   let location = await Location.getCurrentPositionAsync({});
-    //   setLocation(location);
-    //   // console.log(JSON.stringify(location));
-    //   // setTimeout(
-    //   //   async() =>
-    //   //     Location.getCurrentPositionAsync({}).then((location) => {
-    //   //       lct = location;
-    //   //     }),
-    //   //   2000
-    //   // );
-    // })();
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+      // console.log(Location.watchPositionAsync.bind(null, {}));
+      // let [lct] = {};
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+      // console.log(JSON.stringify(location));
+      // setTimeout(
+      //   async() =>
+      //     Location.getCurrentPositionAsync({}).then((location) => {
+      //       lct = location;
+      //     }),
+      //   2000
+      // );
+    })();
   }, []);
 
   const Test = () => {
@@ -326,15 +327,15 @@ export default function Home({ navigation }) {
     }, 500);
   };
 
-  // let latitude = {};
-  // let longitude = {};
-  // if (errorMsg) {
-  //   alert(errorMsg);
-  // } else if (location) {
-  //   latitude = location.coords.latitude;
-  //   longitude = location.coords.longitude;
-  //   // alert(JSON.stringify(location.coords.longitude));
-  // }
+  let latitude = {};
+  let longitude = {};
+  if (errorMsg) {
+    alert(errorMsg);
+  } else if (location) {
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+    // alert(JSON.stringify(location.coords.longitude));
+  }
   if (!fontsLoaded[0]) {
     return <Text>{text}</Text>;
   } else {
@@ -351,9 +352,10 @@ export default function Home({ navigation }) {
             }}
           >
             {/* <Icon name="filter" size={30} color="#D31245" /> */}
-            <AntDesign name="filter" size={30} color="#D1D3D4" />
+            {/* <AntDesign name="filter" size={30} color="#D1D3D4" /> */}
+            <FontAwesome name="sliders" size={30} color="#D1D3D4" />
             <Text style={styles.header__text}>
-              FILTER
+              Filter
               {/* atest */}
             </Text>
           </TouchableOpacity>
@@ -365,7 +367,7 @@ export default function Home({ navigation }) {
             {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
             {/* <AntDesign name="message-circle" size={32} color="green" /> */}
             <Feather name="message-circle" size={30} color="#D1D3D4" />
-            <Text style={styles.header__text}>MESSENGER</Text>
+            <Text style={styles.header__text}>Messengers</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.headerItem}
@@ -374,27 +376,20 @@ export default function Home({ navigation }) {
           >
             <AntDesign name="user" size={30} color="#D1D3D4" />
 
-            <Text style={styles.header__text}>PROFILE</Text>
+            <Text style={styles.header__text}>Profile</Text>
           </TouchableOpacity>
         </View>
 
         {/* :::::::::::: Map :::::::::::: */}
-        {/* {location ? (
-          // <MapScreen latitude={latitude} longitude={longitude} />
-          <Text>{text}</Text>
+        {location ? (
+          <MapScreen latitude={latitude} longitude={longitude} />
         ) : (
           // <Text>Test</Text>
           <Text>{text}</Text>
-        )} */}
+        )}
 
         {/* :::::::::::: Search Bar :::::::::::: */}
         <View style={styles.search__bar}>
-          {/* <Icon
-          name="search"
-          size={25}
-          style={styles.search__icon}
-          color="#D31245"
-        /> */}
           <AntDesign
             name="search1"
             size={24}
@@ -405,23 +400,17 @@ export default function Home({ navigation }) {
         </View>
 
         {/* :::::::::::: Bottom sheet :::::::::::: */}
-        {bottomSheet ? (
-          <BottomSheet
-            ref={BS}
-            snapPoints={["80%", "0%"]}
-            renderContent={renderInner}
-            renderHeader={renderHeader}
-            initialSnap={1}
-            callbackNode={fall}
-            enabledGestureInteraction={true}
-            enabledContentGestureInteraction={false}
-            style={{ height: 700 }}
-          />
-        ) : (
-          <>
-            <Text>Test</Text>
-          </>
-        )}
+        <BottomSheet
+          ref={BS}
+          snapPoints={["78%", "0%"]}
+          renderContent={renderInner}
+          renderHeader={renderHeader}
+          initialSnap={1}
+          callbackNode={fall}
+          enabledGestureInteraction={true}
+          enabledContentGestureInteraction={false}
+          style={{ height: "78%" }}
+        />
       </View>
     );
     // : <AppLoading />;
@@ -431,7 +420,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    // backgroundColor: "red",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
@@ -461,7 +450,7 @@ const styles = StyleSheet.create({
   header__text: {
     color: "#D1D3D4",
     marginTop: 3,
-    fontFamily: "Poppins_500Medium",
+    fontFamily: "main-font",
   },
   headerItem: {
     flex: 1,
@@ -531,6 +520,7 @@ const styles = StyleSheet.create({
   // BottomSheet
   panel: {
     // padding: 20,
+    position: "relative",
     backgroundColor: "#FFFFFF",
     // backgroundColor: "red",
     // paddingTop: 20,
@@ -539,10 +529,14 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     zIndex: 0,
-    // shadowColor: "#000000",
-    // shadowOffset: { width: 0, height: 0 },
-    // shadowRadius: 5,
-    // shadowOpacity: 0.4,
+    shadowColor: "#7F5DF0",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
   headersheet: {
     // backgroundColor: "#FFFFFF",
@@ -583,16 +577,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 50,
+    borderRadius: 12,
     elevation: 3,
     backgroundColor: "#FF0031",
   },
   text: {
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 21,
-    fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
+    fontFamily: "main-font",
   },
   panelButton: {
     padding: 13,
