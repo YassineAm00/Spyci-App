@@ -297,26 +297,25 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     // console.log(fontsLoaded[0]);
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-
-      // console.log(Location.watchPositionAsync.bind(null, {}));
-      // let [lct] = {};
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      // console.log(JSON.stringify(location));
-      // setTimeout(
-      //   async() =>
-      //     Location.getCurrentPositionAsync({}).then((location) => {
-      //       lct = location;
-      //     }),
-      //   2000
-      // );
-    })();
+    // (async () => {
+    //   let { status } = await Location.requestForegroundPermissionsAsync();
+    //   if (status !== "granted") {
+    //     setErrorMsg("Permission to access location was denied");
+    //     return;
+    //   }
+    //   // console.log(Location.watchPositionAsync.bind(null, {}));
+    //   // let [lct] = {};
+    //   let location = await Location.getCurrentPositionAsync({});
+    //   setLocation(location);
+    //   // console.log(JSON.stringify(location));
+    //   // setTimeout(
+    //   //   async() =>
+    //   //     Location.getCurrentPositionAsync({}).then((location) => {
+    //   //       lct = location;
+    //   //     }),
+    //   //   2000
+    //   // );
+    // })();
   }, []);
 
   const Test = () => {
@@ -327,15 +326,15 @@ export default function Home({ navigation }) {
     }, 500);
   };
 
-  let latitude = {};
-  let longitude = {};
-  if (errorMsg) {
-    alert(errorMsg);
-  } else if (location) {
-    latitude = location.coords.latitude;
-    longitude = location.coords.longitude;
-    // alert(JSON.stringify(location.coords.longitude));
-  }
+  // let latitude = {};
+  // let longitude = {};
+  // if (errorMsg) {
+  //   alert(errorMsg);
+  // } else if (location) {
+  //   latitude = location.coords.latitude;
+  //   longitude = location.coords.longitude;
+  //   // alert(JSON.stringify(location.coords.longitude));
+  // }
   if (!fontsLoaded[0]) {
     return <Text>{text}</Text>;
   } else {
@@ -380,12 +379,13 @@ export default function Home({ navigation }) {
         </View>
 
         {/* :::::::::::: Map :::::::::::: */}
-        {location ? (
-          <MapScreen latitude={latitude} longitude={longitude} />
+        {/* {location ? (
+          // <MapScreen latitude={latitude} longitude={longitude} />
+          <Text>{text}</Text>
         ) : (
           // <Text>Test</Text>
           <Text>{text}</Text>
-        )}
+        )} */}
 
         {/* :::::::::::: Search Bar :::::::::::: */}
         <View style={styles.search__bar}>
