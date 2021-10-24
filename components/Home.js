@@ -29,6 +29,7 @@ import {
 } from "@expo-google-fonts/poppins";
 import * as Location from "expo-location";
 import { BoxShadow } from "react-native-shadow";
+import * as firebase from "firebase";
 
 export default function Home({ navigation }) {
   // shadow settings
@@ -297,6 +298,13 @@ export default function Home({ navigation }) {
   let text = "Waiting...";
 
   useEffect(() => {
+    // Test firebase
+    // setTimeout(() => {
+    //   firebase.firestore().collection("Profile").doc("TestId4").set({
+    //     name: "Test4",
+    //     email: "Test4@Gmai.com",
+    //   });
+    // }, 3000);
     // console.log(fontsLoaded[0]);
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
