@@ -12,10 +12,10 @@ import {
   Modal,
   Animated,
 } from "react-native";
-import MapScreen from "./MapScreen";
+import MapScreen from "../MapScreen";
 import { RadioButton } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
-import AnimatedFall, { color } from "react-native-reanimated";
+import AnimatedFall from "react-native-reanimated";
 import RangeSlider, { Slider } from "react-native-range-slider-expo";
 import { AntDesign, Feather, FontAwesome } from "@expo/vector-icons";
 import {
@@ -28,23 +28,13 @@ import {
   Poppins_500Medium_Italic,
 } from "@expo-google-fonts/poppins";
 import * as Location from "expo-location";
-import { BoxShadow } from "react-native-shadow";
 import * as firebase from "firebase";
 
-export default function Home({ navigation }) {
-  // shadow settings
-  const shadowOpt = {
-    width: 100,
-    height: 300,
-    color: "#000",
-    border: 2,
-    radius: 3,
-    opacity: 0.1,
-    x: 0,
-    y: 3,
-    // style:{styles.panel}
-  };
+//:::::::::: THEME ::::::::::
+import styles from "./styles";
+import Colors from "../../assets/styles/Colors";
 
+export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
   let fall = new AnimatedFall.Value(1);
@@ -52,26 +42,6 @@ export default function Home({ navigation }) {
   const [Fiter, setFilter] = useState(false);
   const [bottomSheet, setbottomSheet] = useState(false);
 
-  // const [fontsLoaded , setfontLoaded] = useState(useFonts({
-  //   // Poppins_100Thin,
-  //   // Poppins_100Thin_Italic,
-  //   // Poppins_200ExtraLight,
-  //   // Poppins_200ExtraLight_Italic,
-  //   Poppins_300Light,
-  //   Poppins_300Light_Italic,
-  //   Poppins_400Regular,
-  //   Poppins_400Regular_Italic,
-  //   // Poppins_500Medium,
-  //   // Poppins_500Medium_Italic,
-  //   // Poppins_600SemiBold,
-  //   // Poppins_600SemiBold_Italic,
-  //   // Poppins_700Bold,
-  //   // Poppins_700Bold_Italic,
-  //   // Poppins_800ExtraBold,
-  //   // Poppins_800ExtraBold_Italic,
-  //   // Poppins_900Black,
-  //   // Poppins_900Black_Italic,
-  // }));
   const fontsLoaded = useFonts({
     Poppins_300Light,
     Poppins_300Light_Italic,
@@ -79,7 +49,7 @@ export default function Home({ navigation }) {
     Poppins_400Regular_Italic,
     Poppins_500Medium,
     Poppins_500Medium_Italic,
-    "main-font": require("../assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
+    "main-font": require("../../assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
   });
 
   const renderInner = () => (
@@ -176,7 +146,7 @@ export default function Home({ navigation }) {
               height: 50,
               width: 50,
             }}
-            source={require("../assets/img/Home/Man.png")}
+            source={require("../../assets/img/Home/Man.png")}
           />
 
           <View
@@ -211,7 +181,7 @@ export default function Home({ navigation }) {
               height: 50,
               width: 50,
             }}
-            source={require("../assets/img/Home/Woman.png")}
+            source={require("../../assets/img/Home/Woman.png")}
           />
 
           <View
@@ -424,183 +394,3 @@ export default function Home({ navigation }) {
     // : <AppLoading />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
-    zIndex: 0,
-    // fontFamily: 'Poppins_500Medium'
-  },
-  header: {
-    width: "80%",
-    padding: 7,
-    zIndex: 999999,
-    position: "absolute",
-    top: 50,
-    // display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "white",
-    borderRadius: 5,
-    shadowColor: "#7F5DF0",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
-  },
-  header__text: {
-    color: "#D1D3D4",
-    marginTop: 3,
-    fontFamily: "main-font",
-  },
-  headerItem: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  search__bar: {
-    height: "10%",
-    backgroundColor: "white",
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    position: "absolute",
-    bottom: 0,
-    borderColor: "transparent",
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    shadowColor: "#7F5DF0",
-    shadowOffset: {
-      width: 0,
-      height: 20,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    // elevation: 5,
-    zIndex: 2,
-  },
-  input: {
-    height: "100%",
-    width: "90%",
-    padding: 10,
-    backgroundColor: "transparent",
-    fontFamily: "Poppins_500Medium",
-  },
-  search__icon: {
-    width: "10%",
-    // height: "100%",
-    // marginTop: 15,
-    marginLeft: 10,
-    justifyContent: "center",
-    // alignItems: "center",
-    // textAlign: "center",
-    alignSelf: "center",
-    // backgroundColor: "red",
-  },
-
-  map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-    // width: "100%",
-    // height: "100%",
-    // position: "absolute",
-    zIndex: 99999999,
-  },
-  search: {
-    height: "50%",
-    flex: 0,
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    zIndex: 2,
-    backgroundColor: "red",
-  },
-  listView: { backgroundColor: "white" },
-
-  // BottomSheet
-  panel: {
-    // padding: 20,
-    position: "relative",
-    backgroundColor: "#FFFFFF",
-    // backgroundColor: "red",
-    // paddingTop: 20,
-    height: "100%",
-    overflow: "hidden",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    zIndex: 0,
-    shadowColor: "#7F5DF0",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
-  },
-  headersheet: {
-    // backgroundColor: "#FFFFFF",
-    shadowColor: "#333333",
-    shadowOffset: { width: -1, height: -3 },
-    shadowRadius: 2,
-    shadowOpacity: 0.4,
-    // elevation: 5,
-    paddingTop: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  panelHeader: {
-    alignItems: "center",
-  },
-  panelHandle: {
-    width: 40,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#D3D3D3",
-    marginBottom: 10,
-  },
-  panelTitle: {
-    fontSize: 27,
-    height: 35,
-  },
-  panelSubtitle: {
-    fontSize: 14,
-    color: "gray",
-    height: 30,
-    marginBottom: 10,
-  },
-  buttonSheet: {
-    width: "80%",
-    margin: "auto",
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    elevation: 3,
-    backgroundColor: "#FF0031",
-  },
-  text: {
-    fontSize: 20,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
-    fontFamily: "main-font",
-  },
-  panelButton: {
-    padding: 13,
-    borderRadius: 10,
-    backgroundColor: "#FF6347",
-    alignItems: "center",
-    marginVertical: 7,
-  },
-});

@@ -1,13 +1,12 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../assets/styles/Colors";
-import { useFonts } from "@expo-google-fonts/poppins";
-
-//  Styles = () => {
-//   const fontsLoaded = useFonts({
-//     "Test-Font": require("../../assets/fonts/Nunito-SemiBold.ttf"),
-//   });
 
 export default StyleSheet.create({
+  Container: {
+    width: "100%",
+    height: "100%",
+    padding: 20,
+  },
   ProfileHeader: {
     paddingTop: 35,
     flexDirection: "row",
@@ -26,16 +25,10 @@ export default StyleSheet.create({
     paddingTop: 20,
     borderRadius: 8,
     marginBottom: 5,
-    // shadowColor: "red",
-    // shadowOffset: { width: 10, height: 10 },
-    // shadowColor: "gray",
-    // shadowOpacity: 0.2,
     elevation: 4,
-    // backgroundColor: "#0000", // invisible color
   },
   InfoItem: {
     marginBottom: 7,
-    // backgroundColor:"red",
     flexDirection: "row",
   },
   InfoIcon: {
@@ -47,7 +40,6 @@ export default StyleSheet.create({
   InfoTitle: {
     color: "#777777",
     marginLeft: 20,
-    // fontWeight: "bold",
     fontSize: 11,
     fontFamily: "Poppins_600SemiBold",
   },
@@ -71,6 +63,17 @@ export default StyleSheet.create({
     justifyContent: "center",
     height: 200,
   },
+  ImageAction: {
+    position: "relative",
+    bottom: 45,
+    marginLeft: "auto",
+    marginRight: "auto",
+    flexDirection: "row",
+    width: 90,
+    padding: 7,
+    backgroundColor: "rgba(52, 52, 52, 0.6)",
+    borderRadius: 50,
+  },
   MainImage: {
     height: 200,
     width: 150,
@@ -83,7 +86,6 @@ export default StyleSheet.create({
     bottom: 0,
     width: "100%",
     paddingVertical: 20,
-    // padding: 20,
   },
   MainButton: {
     width: "80%",
@@ -97,7 +99,8 @@ export default StyleSheet.create({
     elevation: 3,
     backgroundColor: "#FF0031",
   },
+  text: {
+    display: "flex",
+    flexDirection: "row",
+  },
 });
-// };
-
-// const styles =
