@@ -6,6 +6,10 @@ import profile from "./components/Profile";
 import Home from "./components/Home";
 import Filter from "./components/Filter";
 
+// Redux
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+
 // Firebase Configuration
 import * as firebase from "firebase";
 
@@ -28,17 +32,19 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Profile" component={profile} />
-        <Stack.Screen name="Filter" component={Filter} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Profile" component={profile} />
+          <Stack.Screen name="Filter" component={Filter} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

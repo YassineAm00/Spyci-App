@@ -429,6 +429,18 @@ import {
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
 
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    CountValue: state.CountValue,
+  };
+};
+
+const mapDispatchToProps = () => {
+  return {};
+};
+
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
@@ -481,7 +493,7 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-const Filter = ({ navigation }) => {
+const Filter = (props, { navigation }) => {
   const fontsLoaded = useFonts({
     // Poppins_100Thin,
     // Poppins_100Thin_Italic,
@@ -558,6 +570,7 @@ const Filter = ({ navigation }) => {
           }, 2000);
         }}
       /> */}
+          <Text> {props.CountValue} </Text>
           <Image
             style={{
               height: 200,
@@ -575,7 +588,7 @@ const Filter = ({ navigation }) => {
   }
 };
 
-export default Filter;
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 const styles = StyleSheet.create({
   modalBackGround: {
