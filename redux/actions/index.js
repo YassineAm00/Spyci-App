@@ -13,6 +13,8 @@ export const fetchData = (id) => {
   //         })
   //     }
   // })
+
+  // Test Action
   return dispatch({
     type: "count",
     payload: id,
