@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import profile from "./components/Profile";
 import Home from "./components/Home";
 import Filter from "./components/Filter";
+import InfoCafe from "./components/Cafe/Info";
 
 // Redux
 import { store } from "./redux/store";
@@ -41,7 +42,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profile" component={profile} />
-          <Stack.Screen name="Filter" component={Filter} />
+          <Stack.Screen name="Filter" component={InfoCafe} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

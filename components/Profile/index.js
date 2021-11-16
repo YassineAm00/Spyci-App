@@ -23,6 +23,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Styles from "./styles";
 import Colors from "../../assets/styles/Colors";
 
+// Loading
+import Loading from "../Loading";
+
 export default function Profile({ navigation }) {
   const fontsLoaded = useFonts({
     Poppins_300Light,
@@ -44,7 +47,7 @@ export default function Profile({ navigation }) {
   const [value, setValue] = useState(0);
 
   if (!fontsLoaded[0]) {
-    return <Text>Waiting ... </Text>;
+    return <Loading />;
   } else {
     return (
       <SafeAreaView>

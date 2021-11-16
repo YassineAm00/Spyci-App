@@ -30,6 +30,8 @@ import {
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
 
+import Loading from "./Loading";
+
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
@@ -306,7 +308,7 @@ export default function MapScreen(props) {
   };
 
   if (!fontsLoaded[0]) {
-    return <Text>Waiting ...</Text>;
+    return <Loading />;
   } else {
     return (
       <>

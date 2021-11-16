@@ -34,6 +34,9 @@ import * as firebase from "firebase";
 import styles from "./styles";
 import Colors from "../../assets/styles/Colors";
 
+// Loading
+import Loading from "../Loading/index";
+
 export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
@@ -315,7 +318,7 @@ export default function Home({ navigation }) {
     // alert(JSON.stringify(location.coords.longitude));
   }
   if (!fontsLoaded[0]) {
-    return <Text>{text}</Text>;
+    return <Loading />;
   } else {
     return (
       <View style={styles.container}>
@@ -363,7 +366,7 @@ export default function Home({ navigation }) {
           <MapScreen latitude={latitude} longitude={longitude} />
         ) : (
           // <Text>Test</Text>
-          <Text>{text}</Text>
+          <Loading />
         )}
 
         {/* :::::::::::: Search Bar :::::::::::: */}
@@ -391,6 +394,5 @@ export default function Home({ navigation }) {
         />
       </View>
     );
-    // : <AppLoading />;
   }
 }

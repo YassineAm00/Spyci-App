@@ -430,6 +430,7 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import { connect } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const mapStateToProps = (state) => {
   return {
@@ -520,13 +521,16 @@ const Filter = (props, { navigation }) => {
     return <Text>waiting ...</Text>;
   } else {
     return (
-      <>
-        <TouchableOpacity
+      <SafeAreaView>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesome name="long-arrow-left" size={25} color="#FF0031" />
+        </TouchableOpacity>
+        {/* <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={{ position: "absolute", top: 40, left: 25 }}
         >
           <FontAwesome name="long-arrow-left" size={25} color="#FF0031" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
@@ -570,7 +574,6 @@ const Filter = (props, { navigation }) => {
           }, 2000);
         }}
       /> */}
-          <Text> {props.CountValue} </Text>
           <Image
             style={{
               height: 200,
@@ -581,9 +584,10 @@ const Filter = (props, { navigation }) => {
           />
           <Text style={{ fontFamily: "Poppins_600SemiBold", color: "#FF0031" }}>
             Au moment de restriction
+            {props.CountValue}
           </Text>
         </View>
-      </>
+      </SafeAreaView>
     );
   }
 };
