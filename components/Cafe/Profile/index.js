@@ -23,7 +23,7 @@ import styles from "./styles";
 export default function Cafe() {
   return (
     <SafeAreaView>
-      <Text>Profile Screen</Text>
+      <Text>Profile SScreen</Text>
     </SafeAreaView>
   );
 }
