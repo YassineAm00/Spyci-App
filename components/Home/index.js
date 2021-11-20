@@ -41,7 +41,8 @@ export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
   let fall = new AnimatedFall.Value(1);
-  const [checked, setChecked] = React.useState("first");
+  const [checkedMan, setCheckedMan] = React.useState(false);
+  const [checkedWoman, setCheckedWoman] = React.useState(false);
   const [Fiter, setFilter] = useState(false);
   const [bottomSheet, setbottomSheet] = useState(false);
 
@@ -164,8 +165,8 @@ export default function Home({ navigation }) {
           >
             <RadioButton
               value="first"
-              status={checked === "first" ? "checked" : "unchecked"}
-              onPress={() => setChecked("first")}
+              status={checkedMan ? "checked" : "unchecked"}
+              onPress={() => setCheckedMan(!checkedMan)}
             />
             <Text style={{ fontSize: 15, color: "gray" }}>Man</Text>
           </View>
@@ -198,9 +199,8 @@ export default function Home({ navigation }) {
           >
             <RadioButton
               value="second"
-              style={{ color: "red" }}
-              status={checked === "second" ? "checked" : "unchecked"}
-              onPress={() => setChecked("second")}
+              status={checkedWoman ? "checked" : "unchecked"}
+              onPress={() => setCheckedWoman(!checkedWoman)}
             />
             <Text style={{ fontSize: 15, color: "gray" }}>Woman</Text>
           </View>
@@ -222,24 +222,36 @@ export default function Home({ navigation }) {
         >
           Age
         </Text>
-        <RangeSlider
-          min={18}
-          max={45}
-          step={1}
-          fromValueOnChange={(value) => setFromValue(value)}
-          toValueOnChange={(value) => setToValue(value)}
-          initialFromValue={11}
-          styleSize={12}
-          fromKnobColor="#FF0031"
-          toKnobColor="#FF0031"
-          knobColor="green"
-          inRangeBarColor="#FF0031"
-          outOfRangeBarColor="#D1D1D1"
-          rangeLabelsTextColor="#D1D1D1"
-          valueLabelsBackgroundColor="#FF0031"
-          initialFromValue={18}
-          initialToValue={45}
-        />
+        <View style={{ backgroundColor: "white", height: 50 }}>
+          <RangeSlider
+            step={1}
+            fromValueOnChange={(value) => setFromValue(value)}
+            toValueOnChange={(value) => setToValue(value)}
+            initialFromValue={18}
+            initialToValue={45}
+            min={18}
+            max={45}
+            styleSize={10}
+            fromKnobColor="#FF0031"
+            toKnobColor="#FF0031"
+            knobColor="green"
+            inRangeBarColor="#FF0031"
+            outOfRangeBarColor="#D1D1D1"
+            showRangeLabels={false}
+            valueLabelsBackgroundColor="#FF0031"
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "90%",
+            alignSelf: "center",
+          }}
+        >
+          <Text style={{ fontWeight: "bold", color: "gray" }}>{fromValue}</Text>
+          <Text style={{ fontWeight: "bold", color: "gray" }}>{toValue}</Text>
+        </View>
       </View>
 
       {/* Button  */}
@@ -260,8 +272,8 @@ export default function Home({ navigation }) {
   );
 
   // Age
-  const [fromValue, setFromValue] = useState(0);
-  const [toValue, setToValue] = useState(0);
+  const [fromValue, setFromValue] = useState(18);
+  const [toValue, setToValue] = useState(45);
   const [value, setValue] = useState(0);
 
   // Current Location Js

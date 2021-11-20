@@ -45,17 +45,20 @@ import {
   StackedBarChart,
 } from "react-native-chart-kit";
 
-export default function Cafe() {
+export default function Cafe({ navigation }) {
   const [ActiveScreen, setActiveScreen] = useState("Info");
 
   return (
     <SafeAreaView style={{ height: "100%" }}>
       {/* Screen Header  */}
       <View style={styles.header}>
-        <View style={styles.center}>
+        <TouchableOpacity
+          style={styles.center}
+          onPress={() => navigation.goBack()}
+        >
           <FontAwesome5 name="map-marked-alt" size={24} color="red" />
           <Text style={{ fontSize: 11, fontWeight: "bold" }}>Maps</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.center}>
           <Text style={styles.title}>Cafe OZ</Text>
           <View style={styles.center_vertic}>
