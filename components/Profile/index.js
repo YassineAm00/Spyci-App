@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { View, Image, Pressable, ScrollView } from "react-native";
 
 import { Avatar, Text } from "react-native-paper";
-import { AntDesign, FontAwesome, Feather, Entypo } from "@expo/vector-icons";
+import {
+  AntDesign,
+  FontAwesome,
+  Feather,
+  Entypo,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
   useFonts,
@@ -79,49 +85,67 @@ export default function Profile({ navigation }) {
           <View style={Styles.Container}>
             {/* :::::::::: Profie Info :::::::::: */}
             <View style={Styles.ProileInfo}>
-              <View style={{ position: "absolute", top: 20, right: 20 }}>
-                <Avatar.Image
-                  source={require("../../assets/img/Profile/Rectangle_2137.png")}
-                  size={50}
-                />
+              <View style={Styles.InfoItem}>
+                <View style={Styles.InfoIconContainer}>
+                  <Avatar.Image
+                    style={Styles.InfoIcon}
+                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                    size={40}
+                  />
+                </View>
+                <Text style={Styles.UserName}>Amanda Lee</Text>
+                {/* Edit pen */}
+                <TouchableOpacity style={Styles.EditButton}>
+                  <MaterialCommunityIcons
+                    name="pencil-outline"
+                    size={24}
+                    color={Colors.MAIN_COLOR}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={Styles.InfoItem}>
-                <AntDesign
-                  name="user"
-                  style={Styles.InfoIcon}
-                  color={Colors.MAIN_COLOR}
-                  size={25}
-                />
+                <View style={Styles.InfoIconContainer}>
+                  <AntDesign
+                    name="user"
+                    style={Styles.InfoIcon}
+                    color={Colors.MAIN_COLOR}
+                    size={25}
+                  />
+                </View>
                 <View>
-                  <Text style={Styles.InfoTitle}>NAME</Text>
-                  <Text style={Styles.Info}>Amanda Lee</Text>
+                  <Text style={Styles.InfoTitle}>GENDER</Text>
+                  <Text style={Styles.Info}>Woman</Text>
                 </View>
               </View>
               <View style={Styles.InfoItem}>
-                <Feather
-                  name="calendar"
-                  style={Styles.InfoIcon}
-                  color={Colors.MAIN_COLOR}
-                  size={25}
-                />
+                <View style={Styles.InfoIconContainer}>
+                  <Feather
+                    name="calendar"
+                    style={Styles.InfoIcon}
+                    color={Colors.MAIN_COLOR}
+                    size={25}
+                  />
+                </View>
                 <View>
                   <Text style={Styles.InfoTitle}>DATE OF BIRTH</Text>
                   <Text style={Styles.Info}>21/06/1997</Text>
                 </View>
               </View>
               <View style={Styles.InfoItem}>
-                <FontAwesome
-                  name="envelope-o"
-                  style={Styles.InfoIcon}
-                  color={Colors.MAIN_COLOR}
-                  size={25}
-                />
+                <View style={Styles.InfoIconContainer}>
+                  <FontAwesome
+                    name="envelope-o"
+                    style={Styles.InfoIcon}
+                    color={Colors.MAIN_COLOR}
+                    size={25}
+                  />
+                </View>
                 <View>
                   <Text style={Styles.InfoTitle}>EMAIL</Text>
                   <Text style={Styles.Info}>amanda.lee@gmail.com</Text>
                 </View>
               </View>
-              <View style={Styles.InfoItem}>
+              {/* <View style={Styles.InfoItem}>
                 <AntDesign
                   name="phone"
                   style={Styles.InfoIcon}
@@ -132,7 +156,67 @@ export default function Profile({ navigation }) {
                   <Text style={Styles.InfoTitle}>TELEPHONE</Text>
                   <Text style={Styles.Info}>+33 6 20 77 15 22</Text>
                 </View>
+              </View> */}
+            </View>
+
+            {/* ::::::::: Images :::::::: */}
+            <View style={Styles.ImagesArea}>
+              <View>
+                <Image
+                  style={Styles.MainImage}
+                  source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                />
+                {/* <View style={Styles.ImageAction}>
+                  <Feather name="image" size={20} color="white" />
+                  {/* <Text
+                    style={{
+                      textAlign: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginLeft: 5,
+                      marginTop: 1,
+                      color: "white",
+                      fontFamily: "Poppins_500Medium",
+                      fontSize: 12,
+                    }}
+                  >
+                    Change
+                  </Text> 
+                </View> */}
               </View>
+              {/* <View
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View
+                  style={{
+                    height: "47%",
+                    width: 90,
+                    borderRadius: 8,
+                    marginLeft: 15,
+                  }}
+                >
+                  <Image
+                    style={{ height: "100%", width: "100%", borderRadius: 8 }}
+                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                  />
+                </View>
+                <View
+                  style={{
+                    height: "47%",
+                    width: 90,
+                    borderRadius: 8,
+                    marginLeft: 15,
+                  }}
+                >
+                  <Image
+                    style={{ height: "100%", width: "100%", borderRadius: 8 }}
+                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                  />
+                </View>
+              </View> */}
             </View>
 
             {/* :::::::::: Bio :::::::::: */}
@@ -161,97 +245,40 @@ export default function Profile({ navigation }) {
                   </Text>
                 </View>
                 <Text style={Styles.BioDescription}>
-                  Leaving a bit of sparkle everywhere I go{" "}
+                  Leaving a bit of sparkle everywhere I go
                 </Text>
               </View>
             </View>
 
-            {/* ::::::::: Images :::::::: */}
-            <View style={Styles.ImagesArea}>
-              <View style={{ textAlign: "center" }}>
-                <Image
-                  style={Styles.MainImage}
-                  source={require("../../assets/img/Profile/Rectangle_2137.png")}
-                />
-                <View style={Styles.ImageAction}>
-                  <Feather name="image" size={20} color="white" />
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginLeft: 5,
-                      marginTop: 1,
-                      color: "white",
-                      fontFamily: "Poppins_500Medium",
-                      fontSize: 12,
-                    }}
-                  >
-                    Change
-                  </Text>
-                </View>
+            {/* :::::::::: Hobbies :::::::::: */}
+            <View style={Styles.ProileInfo}>
+              <View style={Styles.TitleArea}>
+                <AntDesign name="heart" size={24} color={Colors.MAIN_COLOR} />
+                <Text
+                  style={{
+                    fontFamily: "Poppins_600SemiBold",
+                    color: "#777777",
+                    marginLeft: 10,
+                  }}
+                >
+                  HOBBIES
+                </Text>
               </View>
               <View
                 style={{
-                  flexDirection: "column",
-                  justifyContent: "space-between",
+                  flexDirection: "row",
                 }}
               >
-                <View
-                  style={{
-                    height: "47%",
-                    width: 90,
-                    borderRadius: 8,
-                    marginLeft: 15,
-                  }}
-                >
-                  <Image
-                    style={{ height: "100%", width: "100%", borderRadius: 8 }}
-                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                <View style={Styles.Hobbie}>
+                  <MaterialCommunityIcons
+                    name="drawing"
+                    size={24}
+                    color="black"
                   />
-                  <View style={Styles.ImageAction}>
-                    <Feather name="image" size={20} color="white" />
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: 5,
-                        marginTop: 1,
-                        color: "white",
-                        fontFamily: "Poppins_500Medium",
-                        fontSize: 12,
-                      }}
-                    >
-                      Change
-                    </Text>
-                  </View>
+                  <Text>Drawing</Text>
                 </View>
-                <View
-                  style={{
-                    height: "47%",
-                    width: 90,
-                    borderRadius: 8,
-                    marginLeft: 15,
-                  }}
-                >
-                  <Image
-                    style={{ height: "100%", width: "100%", borderRadius: 8 }}
-                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
-                  />
-                  <View style={Styles.ImageAction}>
-                    <Feather name="image" size={20} color="white" />
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        marginLeft: 10,
-                        color: "white",
-                        fontFamily: "Poppins_500Medium",
-                      }}
-                    >
-                      Add
-                    </Text>
-                  </View>
+                <View style={Styles.Hobbie}>
+                  <Text>Drawing</Text>
                 </View>
               </View>
             </View>
@@ -260,11 +287,11 @@ export default function Profile({ navigation }) {
           <Text style={styles.text}>DONE</Text>
         </Pressable> */}
         </ScrollView>
-        <View style={Styles.FixedArea}>
+        {/* <View style={Styles.FixedArea}>
           <Pressable style={Styles.MainButton}>
             <Text style={Styles.text}>DONE</Text>
           </Pressable>
-        </View>
+        </View> */}
       </SafeAreaView>
     );
   }

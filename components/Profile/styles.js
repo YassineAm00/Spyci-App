@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../assets/styles/Colors";
+import ComponentsStyle from "../../assets/styles/Components";
 
 export default StyleSheet.create({
   Container: {
@@ -19,16 +20,30 @@ export default StyleSheet.create({
     color: Colors.TEXT_COLOR,
     alignSelf: "center",
   },
-  ProileInfo: {
-    height: "auto",
-    padding: 15,
-    paddingTop: 20,
-    borderRadius: 8,
-    marginBottom: 5,
-    elevation: 4,
+
+  // Profile Info
+  UserName: {
+    fontSize: 30,
+    color: "gray",
+    marginLeft: 20,
+  },
+  ProileInfo: ComponentsStyle.Card,
+  //   ProileInfo: {
+  //   height: "auto",
+  //   padding: 15,
+  //   paddingTop: 20,
+  //   borderRadius: 8,
+  //   marginBottom: 5,
+  //   elevation: 4,
+  // },
+  InfoIconContainer: {
+    width: "15%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   InfoItem: {
-    marginBottom: 7,
+    marginTop: 2,
+    marginBottom: 2,
     flexDirection: "row",
   },
   InfoIcon: {
@@ -36,6 +51,7 @@ export default StyleSheet.create({
     marginBottom: "auto",
     marginLeft: 10,
     marginRight: 5,
+    // backgroundColor: 'green'
   },
   InfoTitle: {
     color: "#777777",
@@ -49,6 +65,26 @@ export default StyleSheet.create({
     fontSize: 17,
     fontFamily: "Poppins_400Regular",
   },
+  EditButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#7F5DF0",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+
+    // position: 'absolute',
+    // top: 0,
+    // right: 0,
+  },
   BioDescription: {
     fontSize: 12,
     height: 40,
@@ -56,13 +92,16 @@ export default StyleSheet.create({
     fontFamily: "Poppins_400Regular",
     color: "#BDBDBD",
   },
-  ImagesArea: {
-    marginTop: 12,
-    marginBottom: 50,
-    flexDirection: "row",
-    justifyContent: "center",
-    height: 200,
-  },
+  ImagesArea: 
+  ComponentsStyle.Card
+  // {
+  //   marginTop: 12,
+  //   marginBottom: 50,
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  //   height: 200,
+  // }
+  ,
   ImageAction: {
     position: "relative",
     bottom: 45,
@@ -103,4 +142,17 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
+
+  // Hobbies
+  TitleArea: {
+    flexDirection: 'row',
+    paddingLeft: 15
+  },
+  Hobbie: {
+    borderWidth: 1,
+    // padding: 10,
+    width:70,
+    height:35,
+    borderRadius: 50
+  }
 });

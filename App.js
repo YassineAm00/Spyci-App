@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import profile from "./components/Profile";
+import profile_edit from "./components/Profile/Profile-Edit";
 import Home from "./components/Home";
 import Filter from "./components/Filter";
 import InfoCafe from "./components/Cafe/Info";
@@ -42,6 +43,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profile" component={profile} />
+          <Stack.Screen name="ProfileEdit" component={profile_edit} />
           <Stack.Screen name="Filter" component={InfoCafe} />
         </Stack.Navigator>
       </NavigationContainer>
