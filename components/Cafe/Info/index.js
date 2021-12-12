@@ -11,6 +11,7 @@ import {
   Pressable,
   Modal,
   Animated,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -335,7 +336,9 @@ export default function Cafe({ navigation }) {
           ActiveScreen == "Profile" ? { display: "flex" } : { display: "none" }
         }
       >
+        {/* <ScrollView> */}
         <ProfileScreen />
+        {/* </ScrollView> */}
       </View>
     </SafeAreaView>
   );

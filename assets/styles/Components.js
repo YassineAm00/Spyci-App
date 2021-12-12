@@ -3,7 +3,7 @@ import Colors from "./Colors";
 
 export default StyleSheet.create({
   Card: {
-    position: 'relative',
+    position: "relative",
     width: "100%",
     minHeight: 100,
     backgroundColor: "white",
@@ -18,6 +18,6 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
-    marginBottom: 12
+    marginBottom: 15,
   },
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   Text,
   View,
@@ -11,20 +11,68 @@ import {
   Pressable,
   Modal,
   Animated,
+  ScrollView,
+  FlatList,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // Icons
-import { FontAwesome5, Ionicons, Octicons, Feather } from "@expo/vector-icons";
+import {
+  FontAwesome5,
+  Ionicons,
+  Octicons,
+  Feather,
+  AntDesign,
+  Entypo,
+} from "@expo/vector-icons";
 
 // Style
 import styles from "./styles";
 import Colors from "../../../assets/styles/Colors";
 
 export default function Cafe() {
+  const DATA = [
+    {
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      title: "First Item",
+      path: require("../../../assets/img/Profile/Rectangle_2103.png"),
+    },
+    {
+      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      title: "Second Item",
+      path: require("../../../assets/img/Profile/Rectangle_2137.png"),
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      title: "Third Item",
+      path: require("../../../assets/img/Profile/Rectangle_2103.png"),
+    },
+  ];
+
+  const Item = ({ path }) => (
+    <View
+      style={{
+        width: Dimensions.get("window").width,
+        height: 400,
+      }}
+    >
+      <Image style={{ borderRadius: 10 }} source={path} />
+    </View>
+  );
+
+  const renderItem = ({ item }) => <Item path={item.path} />;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  const viewableItemChanged = useRef(({ viewableItem }) => {
+    console.log(viewableItem);
+    // setCurrentIndex(viewableItem[0].index);
+  }).current;
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Text>Profile SScreen</Text> */}
+      {/* :::::::::: User Name :::::::::: */}
       <View style={styles.user_name}>
         <Text
           style={{
@@ -36,18 +84,85 @@ export default function Cafe() {
           Jack Daniel, 22
         </Text>
       </View>
-      <View style={styles.image_area}>
-        <Image
-          style={
-            {
-              // height: "100%",
-              // width: 200,
-              // marginLeft: 20,
-            }
-          }
-          source={require("../../../assets/img/Profile/Rectangle_2103.png")}
-        />
-      </View>
+      <ScrollView style={{ marginTop: 50 }}>
+        <View style={styles.image_area}>
+          <FlatList
+            data={DATA}
+            renderItem={renderItem}
+            horizontal
+            showsHorizontalScrollIndicator
+            pagingEnabled
+            bounces={false}
+            keyExtractor={(item) => item.id}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              {
+                useNativeDriver: false,
+              }
+            )}
+            onViewableItemsChanged={viewableItemChanged}
+          />
+        </View>
+        {/* About me & Hobbies */}
+        <View style={[styles.Card, { width: "90%", marginBottom: 130 }]}>
+          <View style={{ marginBottom: 10 }}>
+            <View style={styles.TitleArea}>
+              {/* <AntDesign name="heart" size={24} color={Colors.MAIN_COLOR} /> */}
+              <Entypo name="text" size={22} color={Colors.MAIN_COLOR} />
+              {/* <Ionicons name="md-game-controller" size={24} color="black" /> */}
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: "main-font",
+                  fontSize: 18,
+                  color: "#2DE04C",
+                }}
+              >
+                About me
+              </Text>
+            </View>
+            <View style={{ padding: 5 }}>
+              <Text style={{ color: Colors.TEXT_COLOR }}>
+                Leaving abit of sparkle everywhere i go
+              </Text>
+            </View>
+          </View>
+          <View>
+            <View style={styles.TitleArea}>
+              <Ionicons
+                name="md-game-controller"
+                size={22}
+                color={Colors.MAIN_COLOR}
+              />
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: "main-font",
+                  fontSize: 18,
+                  color: "#2DE04C",
+                }}
+              >
+                Hobbies
+              </Text>
+            </View>
+            <View style={styles.HobbiesArea}>
+              <View style={styles.Hobbie}>
+                <Text style={{ fontSize: 12 }}>Drawing</Text>
+              </View>
+              <View style={styles.Hobbie}>
+                <Text style={{ fontSize: 12 }}>Food</Text>
+              </View>
+              <View style={styles.Hobbie}>
+                <Text style={{ fontSize: 12 }}>Animals</Text>
+              </View>
+              <View style={styles.Hobbie}>
+                <Text style={{ fontSize: 12 }}>Comedy</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+      {/* :::::::::: Action :::::::::: */}
       <View style={styles.action_area}>
         <View style={styles.action}>
           <TouchableOpacity style={styles.action_button}>

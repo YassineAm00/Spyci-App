@@ -43,8 +43,8 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profile" component={profile} />
-          <Stack.Screen name="ProfileEdit" component={profile_edit} />
           <Stack.Screen name="Filter" component={InfoCafe} />
+          <Stack.Screen name="ProfileEdit" component={profile_edit} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

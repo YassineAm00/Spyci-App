@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../../assets/styles/Colors";
+import Components from "../../../assets/styles/Components";
 import {
   Text,
   View,
@@ -20,15 +21,15 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   image_area: {
-    height: "75%",
-    width: "100%",
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
-    position: "absolute",
-    top: "13%",
-    // bottom: 100,
-    justifyContent: "center",
-    alignItems: "center",
+    height: 350,
+    // width: "100%",
+    // borderTopLeftRadius: 12,
+    // borderTopRightRadius: 12,
+    // position: "absolute",
+    // top: "13%",
+    // // bottom: 100,
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   user_name: {
     height: "17%",
@@ -91,5 +92,33 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  Card: Components.Card,
+  TitleArea: {
+    flexDirection: "row",
+    paddingLeft: 15,
+    paddingVertical: 5,
+    alignItems: "center",
+  },
+  HobbiesArea: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    // flexWrap: "wrap",
+    marginTop: 5,
+  },
+  Hobbie: {
+    borderWidth: 0.1,
+    paddingHorizontal: 10,
+    width: "23%",
+    height: 35,
+    marginTop: 5,
+    marginHorizontal: 3,
+    borderRadius: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
