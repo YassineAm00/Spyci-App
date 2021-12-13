@@ -154,5 +154,6 @@ export default StyleSheet.create({
     width:70,
     height:35,
     borderRadius: 50
+    
   }
 });
