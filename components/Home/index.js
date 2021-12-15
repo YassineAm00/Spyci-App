@@ -283,13 +283,6 @@ export default function Home({ navigation }) {
   let text = "Waiting...";
 
   useEffect(() => {
-    // Test firebase
-    // setTimeout(() => {
-    //   firebase.firestore().collection("Profile").doc("TestId4").set({
-    //     name: "Test4",
-    //     email: "Test4@Gmai.com",
-    //   });
-    // }, 3000);
     // console.log(fontsLoaded[0]);
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -318,6 +311,16 @@ export default function Home({ navigation }) {
     setTimeout(() => {
       BS.current.snapTo(0);
     }, 500);
+  };
+
+  const TestPostFirebase = () => {
+    // Test firebase
+    // setTimeout(() => {
+    //   firebase.firestore().collection("Profile").doc("TestId4").set({
+    //     name: "Test4",
+    //     email: "Test4@Gmai.com",
+    //   });
+    // }, 3000);
   };
 
   let latitude = {};
@@ -355,7 +358,7 @@ export default function Home({ navigation }) {
           <TouchableOpacity
             style={styles.headerItem}
             className=" col-lg-4 "
-            onPress={() => navigation.navigate("Filter")}
+            onPress={() => navigation.navigate("Cafe")}
           >
             {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
             {/* <AntDesign name="message-circle" size={32} color="green" /> */}

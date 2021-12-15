@@ -17,15 +17,17 @@ export default StyleSheet.create({
     width: "70%",
     paddingVertical: 20,
     textAlign: "center",
-    color: Colors.TEXT_COLOR,
+    color: "gray",
     alignSelf: "center",
+    fontSize: 12,
   },
 
   // Profile Info
   UserName: {
     fontSize: 30,
     color: "gray",
-    marginLeft: 20,
+    // marginLeft: 20,
+    fontWeight: "bold",
   },
   ProileInfo: ComponentsStyle.Card,
   //   ProileInfo: {
@@ -45,6 +47,7 @@ export default StyleSheet.create({
     marginTop: 2,
     marginBottom: 2,
     flexDirection: "row",
+    // backgroundColor: "green",
   },
   InfoIcon: {
     marginTop: "auto",
@@ -60,9 +63,10 @@ export default StyleSheet.create({
     fontFamily: "Poppins_600SemiBold",
   },
   Info: {
+    width: "100%",
     color: "#BDBDBD",
     marginLeft: 20,
-    fontSize: 17,
+    fontSize: 14,
     fontFamily: "Poppins_400Regular",
   },
   EditButton: {
@@ -80,28 +84,21 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
-
-    // position: 'absolute',
-    // top: 0,
-    // right: 0,
+    alignSelf: "flex-end",
   },
   BioDescription: {
     fontSize: 12,
-    height: 40,
+    width: "80%",
+    // backgroundColor: "red",
     paddingTop: 10,
-    fontFamily: "Poppins_400Regular",
     color: "#BDBDBD",
+    alignSelf: "center",
   },
-  ImagesArea: 
-  ComponentsStyle.Card
-  // {
-  //   marginTop: 12,
-  //   marginBottom: 50,
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  //   height: 200,
-  // }
-  ,
+  ImagesArea: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    height: 240,
+  },
   ImageAction: {
     position: "relative",
     bottom: 45,
@@ -114,10 +111,14 @@ export default StyleSheet.create({
     borderRadius: 50,
   },
   MainImage: {
-    height: 200,
-    width: 150,
+    height: "100%",
+    width: 160,
     borderRadius: 10,
-    position: "relative",
+  },
+  Image: {
+    height: 120,
+    width: 100,
+    borderRadius: 10,
   },
   FixedArea: {
     backgroundColor: "white",
@@ -145,15 +146,30 @@ export default StyleSheet.create({
 
   // Hobbies
   TitleArea: {
-    flexDirection: 'row',
-    paddingLeft: 15
+    flexDirection: "row",
+    paddingLeft: 15,
+    paddingVertical: 5,
+    alignItems: "center",
+  },
+  HobbiesArea: {
+    width: "100%",
+    // backgroundColor: "green",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    flexWrap: "wrap",
+    marginTop: 5,
   },
   Hobbie: {
-    borderWidth: 1,
-    // padding: 10,
-    width:70,
-    height:35,
-    borderRadius: 50
-    
-  }
+    borderWidth: 0.1,
+    paddingHorizontal: 10,
+    width: "45%",
+    height: 35,
+    margin: 5,
+    borderRadius: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

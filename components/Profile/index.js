@@ -65,7 +65,6 @@ export default function Profile({ navigation }) {
                 <FontAwesome name="long-arrow-left" size={25} color="#FF0031" />
               </TouchableOpacity>
             </View>
-            {/* <Text>Test</Text> */}
             <Text
               style={{
                 fontFamily: "main-font",
@@ -75,27 +74,30 @@ export default function Profile({ navigation }) {
             >
               My Profile
             </Text>
-            <Feather name="settings" size={25} color="#FF0031" />
+            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+              <Feather name="settings" size={25} color="#FF0031" />
+            </TouchableOpacity>
           </View>
-          <Text style={Styles.Descriprion}>
-            Let's add images of you doing exciting staff to spice up your
-            profile
-          </Text>
 
           <View style={Styles.Container}>
             {/* :::::::::: Profie Info :::::::::: */}
             <View style={Styles.ProileInfo}>
-              <View style={Styles.InfoItem}>
+              <View
+                style={[Styles.InfoItem, { justifyContent: "space-evenly" }]}
+              >
                 <View style={Styles.InfoIconContainer}>
                   <Avatar.Image
-                    style={Styles.InfoIcon}
+                    style={[Styles.InfoIcon, { marginRight: 15 }]}
                     source={require("../../assets/img/Profile/Rectangle_2137.png")}
                     size={40}
                   />
                 </View>
-                <Text style={Styles.UserName}>Amanda Lee</Text>
+                <Text style={[Styles.UserName]}>Amanda Lee</Text>
                 {/* Edit pen */}
-                <TouchableOpacity style={Styles.EditButton}>
+                <TouchableOpacity
+                  style={Styles.EditButton}
+                  onPress={() => navigation.navigate("ProfileEdit")}
+                >
                   <MaterialCommunityIcons
                     name="pencil-outline"
                     size={24}
@@ -159,14 +161,7 @@ export default function Profile({ navigation }) {
               </View> */}
             </View>
 
-            {/* ::::::::: Images :::::::: */}
-            <View style={Styles.ImagesArea}>
-              <View>
-                <Image
-                  style={Styles.MainImage}
-                  source={require("../../assets/img/Profile/Rectangle_2137.png")}
-                />
-                {/* <View style={Styles.ImageAction}>
+            {/* <View style={Styles.ImageAction}>
                   <Feather name="image" size={20} color="white" />
                   {/* <Text
                     style={{
@@ -183,71 +178,47 @@ export default function Profile({ navigation }) {
                     Change
                   </Text> 
                 </View> */}
+            {/* ::::::::: Images :::::::: */}
+            <View style={Styles.ProileInfo}>
+              <View style={Styles.ImagesArea}>
+                <Image
+                  style={Styles.MainImage}
+                  source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                />
+                <View
+                  style={{
+                    justifyContent: "space-evenly",
+                  }}
+                >
+                  <Image
+                    style={[Styles.Image, { marginBottom: 10 }]}
+                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                  />
+                  <Image
+                    style={Styles.Image}
+                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
+                  />
+                </View>
               </View>
-              {/* <View
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View
-                  style={{
-                    height: "47%",
-                    width: 90,
-                    borderRadius: 8,
-                    marginLeft: 15,
-                  }}
-                >
-                  <Image
-                    style={{ height: "100%", width: "100%", borderRadius: 8 }}
-                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
-                  />
-                </View>
-                <View
-                  style={{
-                    height: "47%",
-                    width: 90,
-                    borderRadius: 8,
-                    marginLeft: 15,
-                  }}
-                >
-                  <Image
-                    style={{ height: "100%", width: "100%", borderRadius: 8 }}
-                    source={require("../../assets/img/Profile/Rectangle_2137.png")}
-                  />
-                </View>
-              </View> */}
             </View>
 
             {/* :::::::::: Bio :::::::::: */}
             <View style={Styles.ProileInfo}>
-              <View
-                style={{
-                  flexDirection: "column",
-                  paddingVertical: 10,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Entypo
-                    name="text"
-                    style={{ marginRight: 20 }}
-                    size={24}
-                    color="#FF0031"
-                  />
-                  <Text
-                    style={{
-                      fontFamily: "Poppins_600SemiBold",
-                      color: "#777777",
-                    }}
-                  >
-                    BIO
-                  </Text>
-                </View>
-                <Text style={Styles.BioDescription}>
-                  Leaving a bit of sparkle everywhere I go
+              <View style={Styles.TitleArea}>
+                <Entypo name="text" size={24} color="#FF0031" />
+                <Text
+                  style={{
+                    fontFamily: "Poppins_600SemiBold",
+                    color: "#777777",
+                    marginLeft: 10,
+                  }}
+                >
+                  BIO
                 </Text>
               </View>
+              <Text style={Styles.BioDescription}>
+                Leaving a bit of sparkle everywhere I go
+              </Text>
             </View>
 
             {/* :::::::::: Hobbies :::::::::: */}
@@ -264,21 +235,18 @@ export default function Profile({ navigation }) {
                   HOBBIES
                 </Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                }}
-              >
+              <View style={Styles.HobbiesArea}>
                 <View style={Styles.Hobbie}>
-                  <MaterialCommunityIcons
-                    name="drawing"
-                    size={24}
-                    color="black"
-                  />
                   <Text>Drawing</Text>
                 </View>
                 <View style={Styles.Hobbie}>
-                  <Text>Drawing</Text>
+                  <Text>Food</Text>
+                </View>
+                <View style={Styles.Hobbie}>
+                  <Text>Animals</Text>
+                </View>
+                <View style={Styles.Hobbie}>
+                  <Text>Comedy</Text>
                 </View>
               </View>
             </View>

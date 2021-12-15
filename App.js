@@ -7,6 +7,7 @@ import profile_edit from "./components/Profile/Profile-Edit";
 import Home from "./components/Home";
 import Filter from "./components/Filter";
 import InfoCafe from "./components/Cafe/Info";
+import Settings from "./components/Settings";
 
 // Redux
 import { store } from "./redux/store";
@@ -43,8 +44,9 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profile" component={profile} />
+          <Stack.Screen name="Cafe" component={InfoCafe} />
           <Stack.Screen name="ProfileEdit" component={profile_edit} />
-          <Stack.Screen name="Filter" component={InfoCafe} />
+          <Stack.Screen name="Settings" component={Settings} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
