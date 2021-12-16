@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Image,
-  Button,
-  Pressable,
   ScrollView,
   TextInput,
 } from "react-native";
@@ -23,20 +21,6 @@ import {
 } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import {
-  useFonts,
-  Poppins_300Light,
-  Poppins_300Light_Italic,
-  Poppins_400Regular,
-  Poppins_400Regular_Italic,
-  Poppins_500Medium,
-  Poppins_500Medium_Italic,
-  Poppins_600SemiBold,
-  Poppins_600SemiBold_Italic,
-  Poppins_700Bold,
-  Poppins_700Bold_Italic,
-} from "@expo-google-fonts/poppins";
-
 //:::::::::: THEME ::::::::::
 import Styles from "../styles";
 import EditProfileStyle from "./styles";
@@ -55,10 +39,6 @@ export default function Profile({ navigation }) {
   ]);
   let Tab = [];
 
-  // const FillHobbies = () => {
-  //   return Tab;
-  // };
-
   useEffect(() => {
     Hobbies.map(
       (item, i) =>
@@ -71,20 +51,11 @@ export default function Profile({ navigation }) {
               size={20}
               color={Colors.MAIN_COLOR}
             />
-            {/* onPress={RemouveHobbie(i)} */}
           </View>
         )
-
-      // <Text>Test</Text>
     );
     console.log("Tab", Tab);
   }, []);
-
-  // const RemouveHobbie = (index) => {
-  //   // Hobbies.splice(index, 1);
-  //   // console.log("Test", index);
-  //   console.log("Teeeeeeeeeest");
-  // };
 
   return (
     <SafeAreaView>
@@ -146,7 +117,6 @@ export default function Profile({ navigation }) {
               </View>
               <View>
                 <Text style={Styles.InfoTitle}>GENDER</Text>
-                {/* <Text style={Styles.Info}>Woman</Text> */}
                 <TextInput style={Styles.Info} placeholder="Woman" />
               </View>
             </View>
@@ -287,64 +257,10 @@ export default function Profile({ navigation }) {
                       size={20}
                       color={Colors.MAIN_COLOR}
                     />
-                    {/* onPress={RemouveHobbie(i)} */}
                   </View>
                 )
 
-                // <Text>Test</Text>
               )}
-
-              {/* {FillHobbies()} */}
-              {/* {Tab} */}
-
-              {/* <View style={Styles.Hobbie}>
-                <Text>Drawing</Text>
-                <Entypo
-                  name="circle-with-minus"
-                  style={{ position: "absolute", right: -7 }}
-                  size={20}
-                  color={Colors.MAIN_COLOR}
-                  onPress={() => {
-                    alert("TEEEEEEEEEEST");
-                  }}
-                />
-              </View>
-              <View style={Styles.Hobbie}>
-                <Text>Food</Text>
-                <Entypo
-                  name="circle-with-minus"
-                  style={{ position: "absolute", right: -7 }}
-                  size={20}
-                  color={Colors.MAIN_COLOR}
-                  onPress={() => {
-                    alert("TEEEEEEEEEEST");
-                  }}
-                />
-              </View>
-              <View style={Styles.Hobbie}>
-                <Text>Animals</Text>
-                <Entypo
-                  name="circle-with-minus"
-                  style={{ position: "absolute", right: -7 }}
-                  size={20}
-                  color={Colors.MAIN_COLOR}
-                  onPress={() => {
-                    alert("TEEEEEEEEEEST");
-                  }}
-                />
-              </View>
-              <View style={Styles.Hobbie}>
-                <Text>Comedy</Text>
-                <Entypo
-                  name="circle-with-minus"
-                  style={{ position: "absolute", right: -7 }}
-                  size={20}
-                  color={Colors.MAIN_COLOR}
-                  onPress={() => {
-                    alert("TEEEEEEEEEEST");
-                  }}
-                />
-              </View> */}
             </View>
           </View>
         </View>

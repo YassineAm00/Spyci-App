@@ -10,19 +10,6 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import {
-  useFonts,
-  Poppins_300Light,
-  Poppins_300Light_Italic,
-  Poppins_400Regular,
-  Poppins_400Regular_Italic,
-  Poppins_500Medium,
-  Poppins_500Medium_Italic,
-  Poppins_600SemiBold,
-  Poppins_600SemiBold_Italic,
-  Poppins_700Bold,
-  Poppins_700Bold_Italic,
-} from "@expo-google-fonts/poppins";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 //:::::::::: THEME ::::::::::
@@ -33,31 +20,14 @@ import Colors from "../../assets/styles/Colors";
 import Loading from "../Loading";
 
 export default function Profile({ navigation }) {
-  const fontsLoaded = useFonts({
-    Poppins_300Light,
-    Poppins_300Light_Italic,
-    Poppins_400Regular,
-    Poppins_400Regular_Italic,
-    Poppins_500Medium,
-    Poppins_500Medium_Italic,
-    Poppins_600SemiBold,
-    Poppins_600SemiBold_Italic,
-    Poppins_700Bold,
-    Poppins_700Bold_Italic,
-    "main-font": require("../../assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
-    "Test-Font": require("../../assets/fonts/Nunito-SemiBold.ttf"),
-  });
 
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
   const [value, setValue] = useState(0);
-
-  if (!fontsLoaded[0]) {
-    return <Loading />;
-  } else {
     return (
       <SafeAreaView>
         <ScrollView style={{ marginBottom: 20 }}>
+          
           {/* :::::::::: Header :::::::::: */}
           <View style={Styles.ProfileHeader}>
             <View>
@@ -147,37 +117,8 @@ export default function Profile({ navigation }) {
                   <Text style={Styles.Info}>amanda.lee@gmail.com</Text>
                 </View>
               </View>
-              {/* <View style={Styles.InfoItem}>
-                <AntDesign
-                  name="phone"
-                  style={Styles.InfoIcon}
-                  color={Colors.MAIN_COLOR}
-                  size={25}
-                />
-                <View>
-                  <Text style={Styles.InfoTitle}>TELEPHONE</Text>
-                  <Text style={Styles.Info}>+33 6 20 77 15 22</Text>
-                </View>
-              </View> */}
             </View>
 
-            {/* <View style={Styles.ImageAction}>
-                  <Feather name="image" size={20} color="white" />
-                  {/* <Text
-                    style={{
-                      textAlign: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginLeft: 5,
-                      marginTop: 1,
-                      color: "white",
-                      fontFamily: "Poppins_500Medium",
-                      fontSize: 12,
-                    }}
-                  >
-                    Change
-                  </Text> 
-                </View> */}
             {/* ::::::::: Images :::::::: */}
             <View style={Styles.ProileInfo}>
               <View style={Styles.ImagesArea}>
@@ -262,5 +203,4 @@ export default function Profile({ navigation }) {
         </View> */}
       </SafeAreaView>
     );
-  }
 }

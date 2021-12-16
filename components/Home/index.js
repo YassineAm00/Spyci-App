@@ -18,15 +18,6 @@ import BottomSheet from "reanimated-bottom-sheet";
 import AnimatedFall from "react-native-reanimated";
 import RangeSlider, { Slider } from "react-native-range-slider-expo";
 import { AntDesign, Feather, FontAwesome } from "@expo/vector-icons";
-import {
-  useFonts,
-  Poppins_300Light,
-  Poppins_300Light_Italic,
-  Poppins_400Regular,
-  Poppins_400Regular_Italic,
-  Poppins_500Medium,
-  Poppins_500Medium_Italic,
-} from "@expo-google-fonts/poppins";
 import * as Location from "expo-location";
 import * as firebase from "firebase";
 
@@ -45,16 +36,6 @@ export default function Home({ navigation }) {
   const [checkedWoman, setCheckedWoman] = React.useState(false);
   const [Fiter, setFilter] = useState(false);
   const [bottomSheet, setbottomSheet] = useState(false);
-
-  const fontsLoaded = useFonts({
-    Poppins_300Light,
-    Poppins_300Light_Italic,
-    Poppins_400Regular,
-    Poppins_400Regular_Italic,
-    Poppins_500Medium,
-    Poppins_500Medium_Italic,
-    "main-font": require("../../assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
-  });
 
   const renderInner = () => (
     // <BoxShadow setting={shadowOpt}>
@@ -332,9 +313,6 @@ export default function Home({ navigation }) {
     longitude = location.coords.longitude;
     // alert(JSON.stringify(location.coords.longitude));
   }
-  if (!fontsLoaded[0]) {
-    return <Loading />;
-  } else {
     return (
       <View style={styles.container}>
         {/* :::::::::::: Hearder :::::::::::: */}
@@ -409,5 +387,5 @@ export default function Home({ navigation }) {
         />
       </View>
     );
-  }
+  
 }

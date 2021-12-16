@@ -8,6 +8,13 @@ import Home from "./components/Home";
 import Filter from "./components/Filter";
 import InfoCafe from "./components/Cafe/Info";
 import Settings from "./components/Settings";
+import Notifications from "./components/Settings/Notifications";
+
+// Fonts 
+import {
+  useFonts,
+} from "@expo-google-fonts/poppins";
+// import Fonts from "./assets/fonts"
 
 // Redux
 import { store } from "./redux/store";
@@ -15,6 +22,9 @@ import { Provider } from "react-redux";
 
 // Firebase Configuration
 import * as firebase from "firebase";
+
+// Loading
+import Loading from "./components/Loading";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBE0Cbx2yIKCQtIAH2hsinS5sHDHkhkecA",
@@ -34,6 +44,18 @@ if (firebase.apps.length === 0) {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+  // Fonts
+  const fontsLoaded = useFonts({
+    "main-font": require("./assets/fonts/CherryAndKissesPersonalUse-E2W4.ttf"),
+    "Poppins-Font": require("./assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold-Font": require("./assets/fonts/Poppins-SemiBold.ttf"),
+    "Test-Font": require("./assets/fonts/Nunito-SemiBold.ttf"),
+  });
+  if (!fontsLoaded[0]) {
+    return <Loading />
+  }
+  else
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -43,10 +65,14 @@ export default function App() {
           }}
         >
           <Stack.Screen name="Home" component={Home} />
+          {/* User Profile */}
           <Stack.Screen name="Profile" component={profile} />
+          {/* Cafe */}
           <Stack.Screen name="Cafe" component={InfoCafe} />
           <Stack.Screen name="ProfileEdit" component={profile_edit} />
+          {/* Settings  */}
           <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="Notifications" component={Notifications} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
