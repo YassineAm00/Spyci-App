@@ -144,6 +144,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     fontFamily: "main-font",
     color: "white",
+    fontSize: 20,
   },
 
   // Hobbies

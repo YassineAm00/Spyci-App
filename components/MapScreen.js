@@ -31,6 +31,7 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import Loading from "./Loading";
+import Colors from "../assets/styles/Colors";
 
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -276,6 +277,12 @@ export default function MapScreen(props) {
             // onRegionChangeComplete();
           }}
         >
+          <AntDesign
+            name="enter"
+            size={24}
+            style={{ marginRight: 5 }}
+            color="white"
+          />
           <Text style={styles.text}>See Profile</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -291,6 +298,12 @@ export default function MapScreen(props) {
             // onRegionChangeComplete();
           }}
         >
+          <Feather
+            name="check"
+            size={24}
+            style={{ marginRight: 5 }}
+            color="#2DE04C"
+          />
           <Text style={styles.text}>I'm here</Text>
         </TouchableOpacity>
       </View>
@@ -601,6 +614,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     elevation: 3,
     backgroundColor: "#FF0031",
+    flexDirection: "row",
   },
   text: {
     fontSize: 16,

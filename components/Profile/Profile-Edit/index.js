@@ -359,7 +359,7 @@ export default function Profile({ navigation }) {
         </ScrollView>
         <View style={Styles.FixedArea}>
           <Pressable style={Styles.MainButton} onPress={UpdateUser}>
-            <Text style={Styles.text}>DONE</Text>
+            <Text style={Styles.text}>Done</Text>
           </Pressable>
         </View>
       </SafeAreaView>

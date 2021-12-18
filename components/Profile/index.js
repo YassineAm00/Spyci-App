@@ -183,7 +183,7 @@ export default function Profile({ navigation }) {
                   BIO
                 </Text>
               </View>
-              <Text style={Styles.BioDescription}>{user.Bio}</Text>
+              <Text style={[Styles.Info, { marginTop: 6 }]}>{user.Bio}</Text>
             </View>
 
             {/* :::::::::: Hobbies :::::::::: */}
