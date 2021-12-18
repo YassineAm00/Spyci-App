@@ -109,6 +109,7 @@ export default function MapScreen(props) {
   let Bar = useRef();
   let fall = new AnimatedFall.Value(1);
   const [visible, setVisible] = React.useState(false);
+  const [navigation, setNavigation] = React.useState(props.navigation);
 
   const renderBar = () => (
     <View style={styles.panel}>
@@ -265,22 +266,34 @@ export default function MapScreen(props) {
         </View>
       </View>
 
-      {/* Button  */}
-      <TouchableOpacity
-        style={styles.buttonSheet}
-        onPress={() => {
-          setVisible(true);
-          setTimeout(() => {
-            setVisible(false);
-          }, 2000);
-          Bar.current.snapTo(1);
-          setTest(true);
-          // setTest(true);
-          // onRegionChangeComplete();
-        }}
-      >
-        <Text style={styles.text}>I'M HERE</Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        {/* Button  */}
+        <TouchableOpacity
+          style={styles.buttonSheet}
+          onPress={() => {
+            props.navigation.navigate("Cafe");
+            // setTest(true);
+            // onRegionChangeComplete();
+          }}
+        >
+          <Text style={styles.text}>SEE PROFILE</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonSheet}
+          onPress={() => {
+            setVisible(true);
+            setTimeout(() => {
+              setVisible(false);
+            }, 2000);
+            Bar.current.snapTo(1);
+            setTest(true);
+            // setTest(true);
+            // onRegionChangeComplete();
+          }}
+        >
+          <Text style={styles.text}>I'M HERE</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
@@ -323,19 +336,13 @@ export default function MapScreen(props) {
             }}
             onRegionChangeComplete={onRegionChangeComplete}
           >
+            {/* My Location */}
             <Marker
-              // ref={(ref) => {
-              //   this.marker = ref;
-              // }}
               ref={markerRef}
               coordinate={{
                 latitude: props.latitude,
                 longitude: props.longitude,
               }}
-              // style={{ borderRadius: 20 }}
-              // title="test"
-              // description="test"
-              onPress={() => Bar.current.snapTo(0)}
             >
               {test ? (
                 <Callout
@@ -343,17 +350,10 @@ export default function MapScreen(props) {
                 >
                   <View
                     style={{
-                      // borderRadius: 20,
                       width: "100%",
                       height: 75,
-                      // backgroundColor: "red",
                       justifyContent: "center",
                       alignItems: "center",
-                      // textAlign: "center",
-                      // zIndex: 2,
-                      // marginLeft: "auto",
-                      // marginRight: "auto",
-                      // alignSelf: "center",
                     }}
                   >
                     <Text
@@ -378,6 +378,17 @@ export default function MapScreen(props) {
                 <></>
               )}
             </Marker>
+
+            {/* Second Location */}
+            <Marker
+              ref={markerRef}
+              coordinate={{
+                latitude: props.latitude + 0.001,
+                longitude: props.longitude,
+              }}
+              onPress={() => Bar.current.snapTo(0)}
+              pinColor="green"
+            ></Marker>
           </MapView>
         </View>
         <BottomSheet
@@ -580,14 +591,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonSheet: {
-    width: "80%",
+    width: "45%",
     margin: "auto",
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 50,
+    borderRadius: 12,
     elevation: 3,
     backgroundColor: "#FF0031",
   },

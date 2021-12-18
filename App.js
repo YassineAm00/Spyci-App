@@ -77,6 +77,7 @@ export default function App() {
             {/* Settings  */}
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="Notifications" component={Notifications} />
+            <Stack.Screen name="Filter" component={Filter} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

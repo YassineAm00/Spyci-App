@@ -100,6 +100,8 @@ export default StyleSheet.create({
     width: "100%",
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     bottom: 0,
     borderColor: "transparent",

@@ -28,6 +28,9 @@ import Colors from "../../assets/styles/Colors";
 // Loading
 import Loading from "../Loading/index";
 
+// Google place holder
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
 export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
@@ -340,7 +343,7 @@ export default function Home({ navigation }) {
         <TouchableOpacity
           style={styles.headerItem}
           className=" col-lg-4 "
-          onPress={() => navigation.navigate("Cafe")}
+          onPress={() => navigation.navigate("Filter")}
         >
           {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
           {/* <AntDesign name="message-circle" size={32} color="green" /> */}
@@ -360,7 +363,11 @@ export default function Home({ navigation }) {
 
       {/* :::::::::::: Map :::::::::::: */}
       {location ? (
-        <MapScreen latitude={latitude} longitude={longitude} />
+        <MapScreen
+          latitude={latitude}
+          longitude={longitude}
+          navigation={navigation}
+        />
       ) : (
         // <Text>Test</Text>
         <Loading />
@@ -374,7 +381,19 @@ export default function Home({ navigation }) {
           color="#D31245"
           style={styles.search__icon}
         />
-        <TextInput style={styles.input} placeholder="Type here to search" />
+        {/* <TextInput style={styles.input} placeholder="Type here to search" /> */}
+        <GooglePlacesAutocomplete
+          style={styles.input}
+          placeholder="Type here to search"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details);
+          }}
+          query={{
+            key: "YOUR API KEY",
+            language: "en",
+          }}
+        />
       </View>
 
       {/* :::::::::::: Bottom sheet :::::::::::: */}
