@@ -144,7 +144,7 @@ export default function MapScreen(props) {
               color: "#FF0031",
               // fontFamily: "Inter_900Black",
               marginLeft: 6,
-              fontFamily: "Poppins_600SemiBold",
+              fontFamily: "main-font",
               // fontWeight: "bold",
             }}
           >

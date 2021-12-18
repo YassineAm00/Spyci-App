@@ -144,7 +144,7 @@ export default function Notifications({ navigation }) {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      <View
+      {/* <View
         style={{
           backgroundColor: "black",
           backgroundColor: "rgba(221,221,221,0.8)",
@@ -173,7 +173,7 @@ export default function Notifications({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </View> */}
     </>
   );
 }
