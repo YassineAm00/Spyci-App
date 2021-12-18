@@ -145,7 +145,7 @@ export default function MapScreen(props) {
               color: "#FF0031",
               // fontFamily: "Inter_900Black",
               marginLeft: 6,
-              fontFamily: "main-font",
+              fontFamily: "Poppins-Font",
               // fontWeight: "bold",
             }}
           >
@@ -276,7 +276,7 @@ export default function MapScreen(props) {
             // onRegionChangeComplete();
           }}
         >
-          <Text style={styles.text}>SEE PROFILE</Text>
+          <Text style={styles.text}>See Profile</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttonSheet}
@@ -291,7 +291,7 @@ export default function MapScreen(props) {
             // onRegionChangeComplete();
           }}
         >
-          <Text style={styles.text}>I'M HERE</Text>
+          <Text style={styles.text}>I'm here</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -606,7 +606,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
     // fontWeight: "bold",
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: "main-font",
     letterSpacing: 0.25,
     color: "white",
   },
