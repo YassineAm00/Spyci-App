@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Image, Pressable, ScrollView } from "react-native";
 
 import { Avatar, Text } from "react-native-paper";
@@ -11,6 +11,7 @@ import {
 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as firebase from "firebase";
 
 //:::::::::: THEME ::::::::::
 import Styles from "./styles";
@@ -20,14 +21,37 @@ import Colors from "../../assets/styles/Colors";
 import Loading from "../Loading";
 
 export default function Profile({ navigation }) {
-
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
   const [value, setValue] = useState(0);
+  const [user, setUser] = useState(null);
+
+  const fetchBlogs = async () => {
+    await firebase
+      .firestore()
+      .collection("Profile")
+      .doc("lqRBgIx726rMTy9NXLjr")
+      .get()
+      .then((snapshot) => {
+        setUser(snapshot.data());
+      });
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+    const willFocusSubscription = navigation.addListener("focus", () => {
+      fetchBlogs();
+    });
+
+    return willFocusSubscription;
+  }, []);
+
+  if (user == null) {
+    return <Loading />;
+  } else {
     return (
       <SafeAreaView>
         <ScrollView style={{ marginBottom: 20 }}>
-          
           {/* :::::::::: Header :::::::::: */}
           <View style={Styles.ProfileHeader}>
             <View>
@@ -62,7 +86,7 @@ export default function Profile({ navigation }) {
                     size={40}
                   />
                 </View>
-                <Text style={[Styles.UserName]}>Amanda Lee</Text>
+                <Text style={[Styles.UserName]}>{user.Nom}</Text>
                 {/* Edit pen */}
                 <TouchableOpacity
                   style={Styles.EditButton}
@@ -86,7 +110,9 @@ export default function Profile({ navigation }) {
                 </View>
                 <View>
                   <Text style={Styles.InfoTitle}>GENDER</Text>
-                  <Text style={Styles.Info}>Woman</Text>
+                  <Text style={Styles.Info}>
+                    {user.Genre == "F" ? "Woman" : "Men"}
+                  </Text>
                 </View>
               </View>
               <View style={Styles.InfoItem}>
@@ -100,7 +126,7 @@ export default function Profile({ navigation }) {
                 </View>
                 <View>
                   <Text style={Styles.InfoTitle}>DATE OF BIRTH</Text>
-                  <Text style={Styles.Info}>21/06/1997</Text>
+                  <Text style={Styles.Info}>{user.DateAniv}</Text>
                 </View>
               </View>
               <View style={Styles.InfoItem}>
@@ -114,7 +140,7 @@ export default function Profile({ navigation }) {
                 </View>
                 <View>
                   <Text style={Styles.InfoTitle}>EMAIL</Text>
-                  <Text style={Styles.Info}>amanda.lee@gmail.com</Text>
+                  <Text style={Styles.Info}>{user.Email}</Text>
                 </View>
               </View>
             </View>
@@ -157,9 +183,7 @@ export default function Profile({ navigation }) {
                   BIO
                 </Text>
               </View>
-              <Text style={Styles.BioDescription}>
-                Leaving a bit of sparkle everywhere I go
-              </Text>
+              <Text style={[Styles.Info, { marginTop: 6 }]}>{user.Bio}</Text>
             </View>
 
             {/* :::::::::: Hobbies :::::::::: */}
@@ -193,14 +217,15 @@ export default function Profile({ navigation }) {
             </View>
           </View>
           {/* <Pressable style={styles.button}>
-          <Text style={styles.text}>DONE</Text>
-        </Pressable> */}
+            <Text style={styles.text}>DONE</Text>
+          </Pressable> */}
         </ScrollView>
         {/* <View style={Styles.FixedArea}>
-          <Pressable style={Styles.MainButton}>
-            <Text style={Styles.text}>DONE</Text>
-          </Pressable>
-        </View> */}
+            <Pressable style={Styles.MainButton}>
+              <Text style={Styles.text}>DONE</Text>
+            </Pressable>
+          </View> */}
       </SafeAreaView>
     );
+  }
 }

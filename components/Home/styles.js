@@ -100,6 +100,8 @@ export default StyleSheet.create({
     width: "100%",
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     bottom: 0,
     borderColor: "transparent",
@@ -120,7 +122,7 @@ export default StyleSheet.create({
     width: "90%",
     padding: 10,
     backgroundColor: "transparent",
-    fontFamily: "Poppins_500Medium",
+    fontFamily: "Poppins-Font",
   },
   search__icon: {
     width: "10%",

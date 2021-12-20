@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,11 +10,9 @@ import InfoCafe from "./components/Cafe/Info";
 import Settings from "./components/Settings";
 import Notifications from "./components/Settings/Notifications";
 
-// Fonts 
-import {
-  useFonts,
-} from "@expo-google-fonts/poppins";
-// import Fonts from "./assets/fonts"
+// Fonts
+import { useFonts } from "@expo-google-fonts/poppins";
+import "./assets/fonts";
 
 // Redux
 import { store } from "./redux/store";
@@ -25,6 +23,7 @@ import * as firebase from "firebase";
 
 // Loading
 import Loading from "./components/Loading";
+import { LogBox } from "react-native";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBE0Cbx2yIKCQtIAH2hsinS5sHDHkhkecA",
@@ -44,6 +43,12 @@ if (firebase.apps.length === 0) {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    LogBox.ignoreLogs(["Setting a timer"]);
+    // console.ignoredYellowBox = [
+    //   "Setting a timer for a long period of time, i.e. multiple minutes, is a performance and correctness issue on Android as it keeps the timer module awake, and timers can only be called when the app is in the foreground. See https://github.com/facebook/react-native/issues/12981 for more info.(Saw setTimeout with duration 480714ms)",
+    // ];
+  }, []);
 
   // Fonts
   const fontsLoaded = useFonts({
@@ -53,30 +58,30 @@ export default function App() {
     "Test-Font": require("./assets/fonts/Nunito-SemiBold.ttf"),
   });
   if (!fontsLoaded[0]) {
-    return <Loading />
-  }
-  else
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Home" component={Home} />
-          {/* User Profile */}
-          <Stack.Screen name="Profile" component={profile} />
-          {/* Cafe */}
-          <Stack.Screen name="Cafe" component={InfoCafe} />
-          <Stack.Screen name="ProfileEdit" component={profile_edit} />
-          {/* Settings  */}
-          <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="Notifications" component={Notifications} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-  );
+    return <Loading />;
+  } else
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="Home" component={Home} />
+            {/* User Profile */}
+            <Stack.Screen name="Profile" component={profile} />
+            {/* Cafe */}
+            <Stack.Screen name="Cafe" component={InfoCafe} />
+            <Stack.Screen name="ProfileEdit" component={profile_edit} />
+            {/* Settings  */}
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="Notifications" component={Notifications} />
+            <Stack.Screen name="Filter" component={Filter} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    );
 }
 
 const styles = StyleSheet.create({

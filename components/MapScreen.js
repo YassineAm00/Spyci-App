@@ -31,6 +31,7 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import Loading from "./Loading";
+import Colors from "../assets/styles/Colors";
 
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -109,6 +110,7 @@ export default function MapScreen(props) {
   let Bar = useRef();
   let fall = new AnimatedFall.Value(1);
   const [visible, setVisible] = React.useState(false);
+  const [navigation, setNavigation] = React.useState(props.navigation);
 
   const renderBar = () => (
     <View style={styles.panel}>
@@ -144,7 +146,7 @@ export default function MapScreen(props) {
               color: "#FF0031",
               // fontFamily: "Inter_900Black",
               marginLeft: 6,
-              fontFamily: "Poppins_600SemiBold",
+              fontFamily: "Poppins-Font",
               // fontWeight: "bold",
             }}
           >
@@ -265,22 +267,46 @@ export default function MapScreen(props) {
         </View>
       </View>
 
-      {/* Button  */}
-      <TouchableOpacity
-        style={styles.buttonSheet}
-        onPress={() => {
-          setVisible(true);
-          setTimeout(() => {
-            setVisible(false);
-          }, 2000);
-          Bar.current.snapTo(1);
-          setTest(true);
-          // setTest(true);
-          // onRegionChangeComplete();
-        }}
-      >
-        <Text style={styles.text}>I'M HERE</Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        {/* Button  */}
+        <TouchableOpacity
+          style={styles.buttonSheet}
+          onPress={() => {
+            props.navigation.navigate("Cafe");
+            // setTest(true);
+            // onRegionChangeComplete();
+          }}
+        >
+          <AntDesign
+            name="enter"
+            size={24}
+            style={{ marginRight: 5 }}
+            color="white"
+          />
+          <Text style={styles.text}>See Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonSheet}
+          onPress={() => {
+            setVisible(true);
+            setTimeout(() => {
+              setVisible(false);
+            }, 2000);
+            Bar.current.snapTo(1);
+            setTest(true);
+            // setTest(true);
+            // onRegionChangeComplete();
+          }}
+        >
+          <Feather
+            name="check"
+            size={24}
+            style={{ marginRight: 5 }}
+            color="#2DE04C"
+          />
+          <Text style={styles.text}>I'm here</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
@@ -323,19 +349,13 @@ export default function MapScreen(props) {
             }}
             onRegionChangeComplete={onRegionChangeComplete}
           >
+            {/* My Location */}
             <Marker
-              // ref={(ref) => {
-              //   this.marker = ref;
-              // }}
               ref={markerRef}
               coordinate={{
                 latitude: props.latitude,
                 longitude: props.longitude,
               }}
-              // style={{ borderRadius: 20 }}
-              // title="test"
-              // description="test"
-              onPress={() => Bar.current.snapTo(0)}
             >
               {test ? (
                 <Callout
@@ -343,17 +363,10 @@ export default function MapScreen(props) {
                 >
                   <View
                     style={{
-                      // borderRadius: 20,
                       width: "100%",
                       height: 75,
-                      // backgroundColor: "red",
                       justifyContent: "center",
                       alignItems: "center",
-                      // textAlign: "center",
-                      // zIndex: 2,
-                      // marginLeft: "auto",
-                      // marginRight: "auto",
-                      // alignSelf: "center",
                     }}
                   >
                     <Text
@@ -378,6 +391,17 @@ export default function MapScreen(props) {
                 <></>
               )}
             </Marker>
+
+            {/* Second Location */}
+            <Marker
+              ref={markerRef}
+              coordinate={{
+                latitude: props.latitude + 0.001,
+                longitude: props.longitude,
+              }}
+              onPress={() => Bar.current.snapTo(0)}
+              pinColor="green"
+            ></Marker>
           </MapView>
         </View>
         <BottomSheet
@@ -580,22 +604,23 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonSheet: {
-    width: "80%",
+    width: "45%",
     margin: "auto",
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 50,
+    borderRadius: 12,
     elevation: 3,
     backgroundColor: "#FF0031",
+    flexDirection: "row",
   },
   text: {
     fontSize: 16,
     lineHeight: 21,
     // fontWeight: "bold",
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: "main-font",
     letterSpacing: 0.25,
     color: "white",
   },

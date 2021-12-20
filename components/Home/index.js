@@ -28,14 +28,21 @@ import Colors from "../../assets/styles/Colors";
 // Loading
 import Loading from "../Loading/index";
 
+// Google place holder
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
 export default function Home({ navigation }) {
   // Bottom sheet
   let BS = useRef();
   let fall = new AnimatedFall.Value(1);
   const [checkedMan, setCheckedMan] = React.useState(false);
   const [checkedWoman, setCheckedWoman] = React.useState(false);
-  const [Fiter, setFilter] = useState(false);
+  const [Filter, setFilter] = useState(false);
   const [bottomSheet, setbottomSheet] = useState(false);
+
+  useEffect(() => {
+    console.log("Test");
+  }, [BS.snapTo]);
 
   const renderInner = () => (
     // <BoxShadow setting={shadowOpt}>
@@ -60,7 +67,7 @@ export default function Home({ navigation }) {
           style={{ position: "absolute", left: 20 }}
           onPress={() => {
             BS.current.snapTo(1);
-            setbottomSheet(false);
+            setFilter(false);
           }}
         >
           <Feather name="x" size={24} color="#FF0031" />
@@ -236,7 +243,7 @@ export default function Home({ navigation }) {
       </View>
 
       {/* Button  */}
-      <View style={{ position: "absolute", bottom: 85, width: "100%" }}>
+      <View style={{ marginTop: 20, width: "100%" }}>
         <Pressable style={styles.buttonSheet}>
           <Text style={styles.text}>Done</Text>
         </Pressable>
@@ -287,7 +294,7 @@ export default function Home({ navigation }) {
   }, []);
 
   const Test = () => {
-    setbottomSheet(true);
+    setFilter(true);
     // setFilter();
     setTimeout(() => {
       BS.current.snapTo(0);
@@ -313,79 +320,94 @@ export default function Home({ navigation }) {
     longitude = location.coords.longitude;
     // alert(JSON.stringify(location.coords.longitude));
   }
-    return (
-      <View style={styles.container}>
-        {/* :::::::::::: Hearder :::::::::::: */}
-        <View style={styles.header}>
-          <TouchableOpacity
-            // title="test"
-            style={styles.headerItem}
-            className="col-lg-4"
-            onPress={() => {
-              Test();
-            }}
-          >
-            {/* <Icon name="filter" size={30} color="#D31245" /> */}
-            {/* <AntDesign name="filter" size={30} color="#D1D3D4" /> */}
-            <FontAwesome name="sliders" size={30} color="#D1D3D4" />
-            <Text style={styles.header__text}>
-              Filter
-              {/* atest */}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.headerItem}
-            className=" col-lg-4 "
-            onPress={() => navigation.navigate("Cafe")}
-          >
-            {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
-            {/* <AntDesign name="message-circle" size={32} color="green" /> */}
-            <Feather name="message-circle" size={30} color="#D1D3D4" />
-            <Text style={styles.header__text}>Messengers</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.headerItem}
-            className=" col-lg-4 "
-            onPress={() => navigation.navigate("Profile")}
-          >
-            <AntDesign name="user" size={30} color="#D1D3D4" />
+  return (
+    <View style={styles.container}>
+      {/* :::::::::::: Hearder :::::::::::: */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          // title="test"
+          style={styles.headerItem}
+          className="col-lg-4"
+          onPress={() => {
+            Test();
+          }}
+        >
+          {/* <Icon name="filter" size={30} color="#D31245" /> */}
+          {/* <AntDesign name="filter" size={30} color="#D1D3D4" /> */}
+          <FontAwesome name="sliders" size={30} color="#D1D3D4" />
+          <Text style={styles.header__text}>
+            Filter
+            {/* atest */}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.headerItem}
+          className=" col-lg-4 "
+          onPress={() => navigation.navigate("Filter")}
+        >
+          {/* <Icon name="comment" size={30} color="#D1D3D4" /> */}
+          {/* <AntDesign name="message-circle" size={32} color="green" /> */}
+          <Feather name="message-circle" size={30} color="#D1D3D4" />
+          <Text style={styles.header__text}>Messengers</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.headerItem}
+          className=" col-lg-4 "
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <AntDesign name="user" size={30} color="#D1D3D4" />
 
-            <Text style={styles.header__text}>Profile</Text>
-          </TouchableOpacity>
-        </View>
+          <Text style={styles.header__text}>Profile</Text>
+        </TouchableOpacity>
+      </View>
 
-        {/* :::::::::::: Map :::::::::::: */}
-        {location ? (
-          <MapScreen latitude={latitude} longitude={longitude} />
-        ) : (
-          // <Text>Test</Text>
-          <Loading />
-        )}
+      {/* :::::::::::: Map :::::::::::: */}
+      {location ? (
+        <MapScreen
+          latitude={latitude}
+          longitude={longitude}
+          navigation={navigation}
+        />
+      ) : (
+        // <Text>Test</Text>
+        <Loading />
+      )}
 
-        {/* :::::::::::: Search Bar :::::::::::: */}
-        <View style={styles.search__bar}>
-          <AntDesign
-            name="search1"
-            size={24}
-            color="#D31245"
-            style={styles.search__icon}
-          />
-          <TextInput style={styles.input} placeholder="Type here to search" />
-        </View>
-
-        {/* :::::::::::: Bottom sheet :::::::::::: */}
-        <BottomSheet
-          ref={BS}
-          snapPoints={["78%", "0%"]}
-          renderContent={renderInner}
-          renderHeader={renderHeader}
-          initialSnap={1}
-          callbackNode={fall}
-          enabledGestureInteraction={true}
-          enabledContentGestureInteraction={false}
-          style={{ height: "78%" }}
+      {/* :::::::::::: Search Bar :::::::::::: */}
+      <View style={styles.search__bar}>
+        <AntDesign
+          name="search1"
+          size={24}
+          color="#D31245"
+          style={styles.search__icon}
+        />
+        {/* <TextInput style={styles.input} placeholder="Type here to search" /> */}
+        <GooglePlacesAutocomplete
+          style={styles.input}
+          placeholder="Type here to search"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details);
+          }}
+          query={{
+            key: "YOUR API KEY",
+            language: "en",
+          }}
         />
       </View>
-    );
-  
+
+      {/* :::::::::::: Bottom sheet :::::::::::: */}
+      <BottomSheet
+        ref={BS}
+        snapPoints={["78%", "0%"]}
+        renderContent={Filter ? renderInner : null}
+        renderHeader={Filter ? renderHeader : null}
+        initialSnap={1}
+        callbackNode={fall}
+        enabledGestureInteraction={true}
+        enabledContentGestureInteraction={false}
+        style={{ height: "78%" }}
+      />
+    </View>
+  );
 }
