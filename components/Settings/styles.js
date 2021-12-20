@@ -62,34 +62,48 @@ export default StyleSheet.create({
   },
 
   // Alert
-  ConfirmationAlert: {
-    backgroundColor: "white",
-    minWidth: 250,
-    minHeight: 250,
-    opacity: 1,
-    alignSelf: 'center',
-    borderRadius: 12,
-    alignItems: 'center'
+  ConfirmationText:{
+    fontFamily: "main-font",
+    color: Colors.GREEN_COLOR,
+    paddingVertical: 10,
+    fontSize: 20
   },
   AlertAction: {
     flexDirection: 'row',
     position: 'relative',
     width: 200,
-    backgroundColor: 'green',
     justifyContent: 'space-evenly'
   },
-  AlertButton: {
-    backgroundColor: Colors.MAIN_COLOR,
+  AlertButtonNO: {
+    backgroundColor: Colors.TEXT_COLOR,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: 80,
-    padding: 2,
-    borderRadius: 10,
-    flexDirection: 'row',
+    height: 20,
+    borderRadius: 8,
   },
-  AlertButtonText: {
+  AlertButtonYES: {
+    backgroundColor: Colors.MAIN_COLOR,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: 20,
+    borderRadius: 8,
+  },
+  AlertButtonTextNO: {
     fontFamily: 'Poppins-Font',
-    // fontSize: 12
-    backgroundColor: 'yellow',
-  }
+    color: Colors.MAIN_COLOR,
+    marginVertical: "auto",
+    height: 20,
+  },
+  AlertButtonTextYES: {
+    fontFamily: 'Poppins-Font',
+    color: 'white',
+    marginVertical: "auto",
+    height: 20,
+    // backgroundColor: 'yellow',
+  },
+
 });
